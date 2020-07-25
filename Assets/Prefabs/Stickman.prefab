@@ -1116,7 +1116,6 @@ GameObject:
   - component: {fileID: 2839661320676181185}
   - component: {fileID: 453065464603766867}
   - component: {fileID: 6613572793622002134}
-  - component: {fileID: 1104694039}
   m_Layer: 0
   m_Name: Stickman
   m_TagString: Untagged
@@ -1140,6 +1139,7 @@ Transform:
   - {fileID: 8402972124808467542}
   - {fileID: 273043033866734310}
   - {fileID: 4024830207920025731}
+  - {fileID: 2812689349395283287}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1178,6 +1178,7 @@ MonoBehaviour:
     type: 3}
   _muzzle: {fileID: 6905215765278681159}
   _range: {fileID: 4983883377592566681}
+  _body: {fileID: 7370847147095353151}
   joystick: {fileID: 0}
 --- !u!54 &6613572793622002134
 Rigidbody:
@@ -1195,20 +1196,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
---- !u!136 &1104694039
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2839661320683616111}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &2839661320683616113
 GameObject:
   m_ObjectHideFlags: 0
@@ -1529,6 +1516,51 @@ Transform:
   m_Father: {fileID: 8402972124808467542}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7370847147095353151
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2812689349395283287}
+  - component: {fileID: 7587217355327664560}
+  m_Layer: 0
+  m_Name: Body
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2812689349395283287
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7370847147095353151}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2839661320683711245}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7587217355327664560
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7370847147095353151}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &8400587255378002280
 GameObject:
   m_ObjectHideFlags: 0

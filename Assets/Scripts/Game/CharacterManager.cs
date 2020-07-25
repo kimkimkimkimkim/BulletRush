@@ -10,8 +10,10 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private GameObject _muzzle;
     [SerializeField] private GameObject _range;
+    [SerializeField] private GameObject _body;
 
     [HideInInspector] public Joystick joystick;
+    [HideInInspector] public GameManager gameManager;
 
     private const float MOVE_SPEED = 0.04f;
     private const float BULLET_SPEED = 15f;
@@ -23,6 +25,15 @@ public class CharacterManager : MonoBehaviour
 
     private void Start()
     {
+        _body.OnTriggerEnterAsObservable()
+            .Do(collider =>
+            {
+                if(collider.gameObject.tag == "Enemy") {
+                    gameManager.Defeat();
+                }
+            })
+            .Subscribe();
+
         _range.OnTriggerEnterAsObservable()
             .Do(collider =>
             {
@@ -40,6 +51,7 @@ public class CharacterManager : MonoBehaviour
                 }
             })
             .Subscribe();
+
         _range.OnTriggerExitAsObservable()
             .Do(collider =>
             {
@@ -51,18 +63,15 @@ public class CharacterManager : MonoBehaviour
             .Subscribe();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if(rangeColliderList.Count != 0)
+        if (rangeColliderList.Count != 0)
         {
             var closestCollider = GetClosestCollider();
             Fire(closestCollider.transform);
         }
-    }
 
-    private void FixedUpdate()
-    {
-        if(joystick != null && joystick.Direction != Vector2.zero)
+        if (joystick != null && joystick.Direction != Vector2.zero)
         {
             Move();
         }

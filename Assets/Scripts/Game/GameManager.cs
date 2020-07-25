@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private CharacterManager _characterManager;
     [SerializeField] private Joystick _joystick;
     [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private UIManager _uiManager;
 
+    private List<IDisposable> observableList = new List<IDisposable>();
     private List<EnemySpawnData> enemySpawnDataList = new List<EnemySpawnData>()
     {
         new EnemySpawnData(){time = 0,num = 3,position = new Vector3(1,0,3),direction = new Vector3(-1,0,-1)},
@@ -32,6 +35,7 @@ public class GameManager : MonoBehaviour
     private void ConnectCharaAndJoystick()
     {
         _characterManager.joystick = _joystick;
+        _characterManager.gameManager = this;
     }
 
     private void GameStart()
@@ -43,9 +47,10 @@ public class GameManager : MonoBehaviour
     {
         enemySpawnDataList.ForEach(enemySpawnData =>
         {
-            Observable.Timer(TimeSpan.FromSeconds(enemySpawnData.time))
+            var observable = Observable.Timer(TimeSpan.FromSeconds(enemySpawnData.time))
                 .Do(_ => CreateEnemy(enemySpawnData))
                 .Subscribe();
+            observableList.Add(observable);
         });
     }
 
@@ -59,4 +64,34 @@ public class GameManager : MonoBehaviour
         enemyManager.SetNum(enemySpawnData.num);
         enemyManager.Move(enemySpawnData.direction);
     }
+
+    private void Dispose()
+    {
+        observableList.ForEach(observable =>
+        {
+            observable.Dispose();
+        });
+        observableList.Clear();
+    }
+
+    public void Defeat() {
+        Time.timeScale = 0;
+        _uiManager.SetUI(UIMode.Defeat);
+
+        DefeatWindowFactory.Create(new DefeatWindowRequest())
+            .Do(_ => Time.timeScale = 1)
+            .Do(res =>
+            {
+                if (res.isContinue) {
+                    _uiManager.SetUI(UIMode.Playing);
+                }
+                else
+                {
+                    Dispose();
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                }
+            })
+            .Subscribe();
+    }
+
 }

@@ -683,6 +683,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterManager: {fileID: 1174379768}
   _joystick: {fileID: 4378441347402825236}
+  _enemyPrefab: {fileID: 7437335558225629985, guid: db12f0c485124488f9811989f150d254,
+    type: 3}
 --- !u!4 &1676706585
 Transform:
   m_ObjectHideFlags: 0

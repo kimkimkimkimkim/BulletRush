@@ -11120,6 +11120,50 @@ Transform:
   m_Father: {fileID: 2136969730251291975}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1853234108882502204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6721938213928318811}
+  - component: {fileID: 5303967218336650798}
+  m_Layer: 0
+  m_Name: Top
+  m_TagString: Wall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6721938213928318811
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853234108882502204}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.3, z: 6.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6974574743888366312}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5303967218336650798
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853234108882502204}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7, y: 1, z: 0.7}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1856954970732755343
 GameObject:
   m_ObjectHideFlags: 0
@@ -13322,7 +13366,7 @@ GameObject:
   - component: {fileID: 5072578483629230837}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (10)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13646,7 +13690,7 @@ GameObject:
   - component: {fileID: 6216945656450567798}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14925,7 +14969,7 @@ GameObject:
   - component: {fileID: 6689182153631495440}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (10)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15670,7 +15714,7 @@ GameObject:
   - component: {fileID: 3137449037420107638}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (12)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16769,7 +16813,7 @@ GameObject:
   - component: {fileID: 2426931412116275426}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (9)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17627,7 +17671,7 @@ GameObject:
   - component: {fileID: 908070318705334132}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (15)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18562,7 +18606,7 @@ GameObject:
   - component: {fileID: 343798531611010148}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (16)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18732,7 +18776,7 @@ GameObject:
   - component: {fileID: 7624082926844124210}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18825,7 +18869,7 @@ GameObject:
   - component: {fileID: 5483156443852641733}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (20)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19226,7 +19270,7 @@ GameObject:
   - component: {fileID: 4909229192579941207}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19319,7 +19363,7 @@ GameObject:
   - component: {fileID: 6854685824644938391}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (17)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20464,7 +20508,7 @@ GameObject:
   - component: {fileID: 2727327178233466490}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (6)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21933,7 +21977,7 @@ GameObject:
   - component: {fileID: 7778127242276287687}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (10)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22411,7 +22455,7 @@ GameObject:
   - component: {fileID: 8465725623258580486}
   m_Layer: 0
   m_Name: Big Grass Tile_3
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24609,7 +24653,7 @@ GameObject:
   - component: {fileID: 5330960427429138145}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (6)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25010,7 +25054,7 @@ GameObject:
   - component: {fileID: 2842814575308479903}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (18)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25873,7 +25917,7 @@ GameObject:
   - component: {fileID: 6037377289205618478}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (9)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25966,7 +26010,7 @@ GameObject:
   - component: {fileID: 2295128291006807868}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (3)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26747,7 +26791,7 @@ GameObject:
   - component: {fileID: 994611165179325354}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (20)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27687,7 +27731,7 @@ GameObject:
   - component: {fileID: 1224600195160922265}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (17)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27780,7 +27824,7 @@ GameObject:
   - component: {fileID: 5710385311781733507}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (8)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27950,7 +27994,7 @@ GameObject:
   - component: {fileID: 3425963330762573145}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (8)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28541,7 +28585,7 @@ GameObject:
   - component: {fileID: 2820577178260727800}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (3)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29250,7 +29294,7 @@ GameObject:
   - component: {fileID: 562313903875093405}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (18)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29343,7 +29387,7 @@ GameObject:
   - component: {fileID: 8644492255370196294}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (13)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30011,7 +30055,7 @@ GameObject:
   - component: {fileID: 5330072028603266427}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (6)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30104,7 +30148,7 @@ GameObject:
   - component: {fileID: 711959737861646207}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (5)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30464,7 +30508,7 @@ GameObject:
   - component: {fileID: 4771472406751874449}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (4)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30901,7 +30945,7 @@ GameObject:
   - component: {fileID: 5643494402800820998}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (9)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30994,7 +31038,7 @@ GameObject:
   - component: {fileID: 7737680396304207277}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (13)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31626,7 +31670,7 @@ GameObject:
   - component: {fileID: 1439085951257925162}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32027,7 +32071,7 @@ GameObject:
   - component: {fileID: 5766728717340178665}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (3)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32197,7 +32241,7 @@ GameObject:
   - component: {fileID: 7656823002985604977}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (5)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32747,7 +32791,7 @@ GameObject:
   - component: {fileID: 6668366355554779166}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (9)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32840,7 +32884,7 @@ GameObject:
   - component: {fileID: 6350897063652757164}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (5)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33544,7 +33588,7 @@ GameObject:
   - component: {fileID: 8242433015677824256}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (4)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34058,7 +34102,7 @@ GameObject:
   - component: {fileID: 7441375756046093776}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (8)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34536,7 +34580,7 @@ GameObject:
   - component: {fileID: 6034911241706355744}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (6)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35398,7 +35442,7 @@ GameObject:
   - component: {fileID: 1076402647815975279}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (12)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38027,7 +38071,7 @@ GameObject:
   - component: {fileID: 4013010780492395016}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (16)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38892,7 +38936,7 @@ GameObject:
   - component: {fileID: 1920367501036273597}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (10)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39755,7 +39799,7 @@ GameObject:
   - component: {fileID: 1252637099182585530}
   m_Layer: 0
   m_Name: Big Grass Tile_3
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41075,7 +41119,7 @@ GameObject:
   - component: {fileID: 3409944433265243910}
   m_Layer: 0
   m_Name: Big Grass Tile_3
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41625,7 +41669,7 @@ GameObject:
   - component: {fileID: 8420160584520097927}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (11)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41795,7 +41839,7 @@ GameObject:
   - component: {fileID: 767411060226374067}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (11)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42961,7 +43005,7 @@ GameObject:
   - component: {fileID: 4661055678934178680}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44204,7 +44248,7 @@ GameObject:
   - component: {fileID: 6054050277754616750}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (15)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44466,6 +44510,7 @@ Transform:
   m_Children:
   - {fileID: 2136969731210054375}
   - {fileID: 2136969730251291975}
+  - {fileID: 6974574743888366312}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -44827,7 +44872,7 @@ GameObject:
   - component: {fileID: 8870894991575601278}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (3)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45033,7 +45078,7 @@ GameObject:
   - component: {fileID: 2903987486579752484}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (4)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45280,7 +45325,7 @@ GameObject:
   - component: {fileID: 3228574333505172684}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (7)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45373,7 +45418,7 @@ GameObject:
   - component: {fileID: 74707011026494037}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (19)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45928,7 +45973,7 @@ GameObject:
   - component: {fileID: 3019905685724881320}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46406,7 +46451,7 @@ GameObject:
   - component: {fileID: 2567288017352861919}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (7)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46730,7 +46775,7 @@ GameObject:
   - component: {fileID: 5322740327685741025}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50422,7 +50467,7 @@ GameObject:
   - component: {fileID: 3280097778704488595}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (7)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51511,7 +51556,7 @@ GameObject:
   - component: {fileID: 6096310915660356878}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51604,7 +51649,7 @@ GameObject:
   - component: {fileID: 199480684051605158}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (5)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51923,7 +51968,7 @@ GameObject:
   - component: {fileID: 4849486987370468660}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (8)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52136,7 +52181,7 @@ GameObject:
   - component: {fileID: 8927078465393955411}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (4)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52953,7 +52998,7 @@ GameObject:
   - component: {fileID: 71115195293530269}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (14)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53313,7 +53358,7 @@ GameObject:
   - component: {fileID: 3629776975056657007}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (7)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54474,7 +54519,7 @@ GameObject:
   - component: {fileID: 1778020647341822623}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (14)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55337,7 +55382,7 @@ GameObject:
   - component: {fileID: 5304269315762434412}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (19)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58512,7 +58557,7 @@ GameObject:
   - component: {fileID: 4154313045292743567}
   m_Layer: 0
   m_Name: Big Grass Tile_3
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67462,6 +67507,50 @@ Transform:
   m_Father: {fileID: 303121495784642437}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3968500271570525547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7305266970149979897}
+  - component: {fileID: 1842743095707271305}
+  m_Layer: 0
+  m_Name: Right
+  m_TagString: Wall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7305266970149979897
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3968500271570525547}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.6, y: 1.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6974574743888366312}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1842743095707271305
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3968500271570525547}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7, y: 1, z: 13}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4005541002592863626
 GameObject:
   m_ObjectHideFlags: 0
@@ -68729,6 +68818,50 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &4212527448003604352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 920287834009503292}
+  - component: {fileID: 2890062182842777810}
+  m_Layer: 0
+  m_Name: Left
+  m_TagString: Wall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &920287834009503292
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4212527448003604352}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.6, y: 1.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6974574743888366312}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2890062182842777810
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4212527448003604352}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7, y: 1, z: 13}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4240243061087700599
 GameObject:
   m_ObjectHideFlags: 0
@@ -72525,7 +72658,7 @@ GameObject:
   - component: {fileID: 18930594661586584}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (11)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74421,7 +74554,7 @@ GameObject:
   - component: {fileID: 7262409058933280335}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (12)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78432,6 +78565,40 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &5956465961165969960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6974574743888366312}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6974574743888366312
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5956465961165969960}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6721938213928318811}
+  - {fileID: 7171693210747600949}
+  - {fileID: 7305266970149979897}
+  - {fileID: 920287834009503292}
+  m_Father: {fileID: 2136969730744056556}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5977613074457495721
 GameObject:
   m_ObjectHideFlags: 0
@@ -79942,7 +80109,7 @@ GameObject:
   - component: {fileID: 8060494606848119756}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (12)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94071,7 +94238,7 @@ GameObject:
   - component: {fileID: 6464128307886544539}
   m_Layer: 0
   m_Name: Big Grass Tile_3 (11)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95682,6 +95849,50 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &8950068536689846886
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7171693210747600949}
+  - component: {fileID: 932058885755736639}
+  m_Layer: 0
+  m_Name: Bottom
+  m_TagString: Wall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7171693210747600949
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8950068536689846886}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.3, z: -6.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6974574743888366312}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &932058885755736639
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8950068536689846886}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7, y: 1, z: 0.7}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8952073284686464754
 GameObject:
   m_ObjectHideFlags: 0

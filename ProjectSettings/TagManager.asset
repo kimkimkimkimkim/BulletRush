@@ -8,6 +8,11 @@ TagManager:
   - Metal
   - ExplosiveBarrel
   - Wall
+  - Enemy
+  - WallTop
+  - WallRight
+  - WallLeft
+  - WallBottom
   layers:
   - Default
   - TransparentFX

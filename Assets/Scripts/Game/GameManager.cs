@@ -1,12 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private CharacterManager _characterManager;
     [SerializeField] private Joystick _joystick;
     [SerializeField] private GameObject _enemyPrefab;
+
+    private List<EnemySpawnData> enemySpawnDataList = new List<EnemySpawnData>()
+    {
+        new EnemySpawnData(){time = 0,num = 3,position = new Vector3(1,0,3),direction = new Vector3(-1,0,-1)},
+        new EnemySpawnData(){time = 3,num = 4,position = new Vector3(-1,0,-3),direction = new Vector3(1,0,1)},
+        new EnemySpawnData(){time = 6,num = 5,position = new Vector3(1,0,-3),direction = new Vector3(-1,0,1)},
+        new EnemySpawnData(){time = 9,num = 6,position = new Vector3(-1,0,3),direction = new Vector3(1,0,-1)},
+        new EnemySpawnData(){time = 12,num = 10,position = new Vector3(1,0,3),direction = new Vector3(-1,0,1)},
+        new EnemySpawnData(){time = 12,num = 10,position = new Vector3(-1,0,3),direction = new Vector3(1,0,-1)},
+        new EnemySpawnData(){time = 12,num = 10,position = new Vector3(0,0,-3),direction = new Vector3(0.2f,0,-1)},
+        new EnemySpawnData(){time = 20,num = 20,position = new Vector3(0,0,5),direction = new Vector3(1,0,-1)},
+    };
 
     private void Start()
     {
@@ -22,16 +36,27 @@ public class GameManager : MonoBehaviour
 
     private void GameStart()
     {
-        CreateEnemy();
+        CreateEnemy(enemySpawnDataList);
     }
 
-    private void CreateEnemy() {
+    private void CreateEnemy(List<EnemySpawnData> enemySpawnDataList)
+    {
+        enemySpawnDataList.ForEach(enemySpawnData =>
+        {
+            Observable.Timer(TimeSpan.FromSeconds(enemySpawnData.time))
+                .Do(_ => CreateEnemy(enemySpawnData))
+                .Subscribe();
+        });
+    }
+
+    private void CreateEnemy(EnemySpawnData enemySpawnData)
+    {
         var y = 1.2f;
         var enemy = (GameObject)Instantiate(_enemyPrefab);
-        enemy.transform.position = new Vector3(0, y, 2.66f);
+        enemy.transform.position = new Vector3(enemySpawnData.position.x, y, enemySpawnData.position.z);
 
         var enemyManager = enemy.GetComponent<EnemyManager>();
-        enemyManager.SetNum(3);
-        enemyManager.Move(new Vector3(1, 0, 1));
+        enemyManager.SetNum(enemySpawnData.num);
+        enemyManager.Move(enemySpawnData.direction);
     }
 }

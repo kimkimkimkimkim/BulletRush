@@ -12,18 +12,27 @@ public class EnemyManager : MonoBehaviour
     private int num;
     private Vector3 moveDirection;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.tag == "Wall")
-        { 
-            Reflection(collision);
+        if(
+            other.gameObject.tag == "WallTop" ||
+            other.gameObject.tag == "WallRight" ||
+            other.gameObject.tag == "WallLeft" ||
+            other.gameObject.tag == "WallBottom" )
+        {
+            Reflection(other);
         }
-       
     }
 
     public void SetNum(int num) {
         this.num = num;
         _numText.text = num.ToString();
+    }
+
+    public void TakeDamage(int damage) {
+        if (num - damage <= 0) Destroy(gameObject);
+
+        SetNum(num - damage);
     }
 
     public void Move(Vector3 direction)
@@ -32,11 +41,26 @@ public class EnemyManager : MonoBehaviour
         GetComponent<Rigidbody>().velocity = direction.normalized * SPEED;
     }
 
-    private void Reflection(Collision collision)
+    private void Reflection(Collider other)
     {
-        Vector3 normal = collision.contacts[0].normal;
-        Vector3 reflect = Vector3.Reflect(moveDirection, normal);
-        Debug.Log($"{reflect.x} {reflect.y} {reflect.z}");
+        Vector3 reflect = Vector3.Reflect(moveDirection, GetNormal(other.gameObject.tag));
         Move(reflect);
+    }
+
+    private Vector3 GetNormal(string tagName)
+    {
+        switch (tagName)
+        {
+            case "WallTop":
+                return Vector3.back;
+            case "WallRight":
+                return Vector3.left;
+            case "WallLeft":
+                return Vector3.right;
+            case "WallBottom":
+                return Vector3.forward;
+            default:
+                return Vector3.zero;
+        }
     }
 }

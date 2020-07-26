@@ -33,7 +33,6 @@ public class DefeatWindowUIScript : WindowBase
             .Subscribe();
 
         _noThanksButton.OnClickAsObservable()
-            .SelectMany(_ => UIManager.Instance.CloseWindowObservable(gameObject))
             .Do(_ =>
             {
                 if (onClickNoThanks != null)

@@ -20,7 +20,7 @@ public class GameWindowUIScript : WindowBase
 
     private void Update()
     {
-        SetScore();
+        //SetScore();
     }
 
     private void SetInitialScore()
@@ -30,9 +30,8 @@ public class GameWindowUIScript : WindowBase
         _scoreSlider.value = 0;
     }
 
-    private void SetScore()
+    public void SetScore(int score)
     {
-        var score = GameManager.Instance.score;
         _scoreText.text = score.ToString();
         _scoreSlider.value = score;
     }

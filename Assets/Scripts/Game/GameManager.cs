@@ -14,6 +14,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [HideInInspector] public int score;
     [HideInInspector] public int stageClearScore;
 
+    private GameWindowUIScript gameWindowUIScript;
     private List<IDisposable> observableList = new List<IDisposable>();
     private List<EnemyData> enemyDataList = new List<EnemyData>()
     {
@@ -127,8 +128,20 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void AddScore(int damage)
     {
+        if (gameWindowUIScript == null) SetGameWindowUIScript();
+
         score += damage;
+        if (gameWindowUIScript != null) gameWindowUIScript.SetScore(score);
         if (score >= stageClearScore) Clear();
+    }
+
+    private void SetGameWindowUIScript()
+    {
+        var window = UIManager.Instance.GetNowWindow();
+        if (window.GetComponent<GameWindowUIScript>())
+        {
+            gameWindowUIScript = window.GetComponent<GameWindowUIScript>();
+        }
     }
 
     public void KillTheEnemy(EnemyData enemyData)

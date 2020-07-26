@@ -418,7 +418,7 @@ PrefabInstance:
     - target: {fileID: 2839661320683711245, guid: 82d97aeae64ec45658e643394e7728ea,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2.33
       objectReference: {fileID: 0}
     - target: {fileID: 2839661320683711245, guid: 82d97aeae64ec45658e643394e7728ea,
         type: 3}
@@ -499,7 +499,7 @@ PrefabInstance:
     - target: {fileID: 2136969730744056556, guid: 25ecac321545a435488b8ec8e4bf37d3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.54
       objectReference: {fileID: 0}
     - target: {fileID: 2136969730744056556, guid: 25ecac321545a435488b8ec8e4bf37d3,
         type: 3}
@@ -743,7 +743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 64732717}
-  _joystick: {fileID: 4378441347402825233}
+  _joystick: {fileID: 4378441347402825236}
 --- !u!224 &4378441347402825232
 RectTransform:
   m_ObjectHideFlags: 0
@@ -832,6 +832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17701c567f14e4eef9ecc710df1c0656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  homeWindow: {fileID: 0}
   handleRange: 1
   deadZone: 0.1
   axisOptions: 0

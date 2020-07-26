@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class UIManager : SingletonMonoBehaviour<UIManager>
 {
     [SerializeField] GameObject _canvas;
-    [SerializeField] GameObject _joystick;
+    [SerializeField] Joystick _joystick;
 
     private void Start()
     {
@@ -20,22 +20,29 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
         switch (uiMode)
         {
             case UIMode.Home:
-                _joystick.SetActive(true);
+                _joystick.gameObject.SetActive(true);
+                OpenHomeWindow();
                 break;
             case UIMode.Playing:
-                _joystick.SetActive(true);
+                _joystick.gameObject.SetActive(true);
                 break;
             case UIMode.Defeat:
                 _joystick.GetComponent<Joystick>().Initialize();
-                _joystick.SetActive(false);
+                _joystick.gameObject.SetActive(false);
                 break;
             case UIMode.Win:
                 _joystick.GetComponent<Joystick>().Initialize();
-                _joystick.SetActive(false);
+                _joystick.gameObject.SetActive(false);
                 break;
             default:
                 break;
         }
+    }
+
+    private void OpenHomeWindow()
+    {
+        HomeWindowFactory.Create(new HomeWindowRequest() { joystick = _joystick })
+            .Subscribe();
     }
 
     public void OpenWindow<T>(GameObject window,Dictionary<string, object> param) where T : WindowBase

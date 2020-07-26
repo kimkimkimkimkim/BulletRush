@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
+    public GameObject homeWindow;
     public float Horizontal { get { return (snapX) ? SnapFloat(input.x, AxisOptions.Horizontal) : input.x; } }
     public float Vertical { get { return (snapY) ? SnapFloat(input.y, AxisOptions.Vertical) : input.y; } }
     public Vector2 Direction { get { return new Vector2(Horizontal, Vertical); } }
@@ -59,7 +61,19 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
+        GameStart();
         OnDrag(eventData);
+    }
+
+    private void GameStart()
+    {
+        if (homeWindow != null)
+        {
+            UIManager.Instance.CloseWindowObservable(homeWindow).Subscribe();
+            homeWindow = null;
+
+            GameManager.Instance.GameStart();
+        }
     }
 
     public void OnDrag(PointerEventData eventData)

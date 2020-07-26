@@ -29,7 +29,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         ConnectCharaAndJoystick();
 
-        GameStart();
+        //GameStart();
     }
 
     private void ConnectCharaAndJoystick()
@@ -38,7 +38,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         _characterManager.gameManager = this;
     }
 
-    private void GameStart()
+    public void GameStart()
     {
         CreateEnemy(enemySpawnDataList);
     }

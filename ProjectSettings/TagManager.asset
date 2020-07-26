@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Target
+  - Metal
+  - ExplosiveBarrel
+  - Wall
+  - Enemy
+  - WallTop
+  - WallRight
+  - WallLeft
+  - WallBottom
+  - Screen
   layers:
   - Default
   - TransparentFX

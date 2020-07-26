@@ -7,8 +7,8 @@ using System;
 
 public class DefeatWindowUIScript : WindowBase
 {
-    [SerializeField] Button _continueButton;
-    [SerializeField] Button _noThanksButton;
+    [SerializeField] private Button _continueButton;
+    [SerializeField] private Button _noThanksButton;
 
     private Action onClickContinue;
     private Action onClickNoThanks;

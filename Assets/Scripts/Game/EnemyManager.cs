@@ -30,9 +30,14 @@ public class EnemyManager : MonoBehaviour
     }
 
     public void TakeDamage(int damage) {
-        if (num - damage <= 0) Destroy(gameObject);
+        if (num - damage <= 0) Killed();
 
         SetNum(num - damage);
+    }
+
+    private void Killed() {
+        GameManager.Instance.KillTheEnemy();
+        Destroy(gameObject);
     }
 
     public void Move(Vector3 direction)

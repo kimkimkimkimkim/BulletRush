@@ -5,13 +5,13 @@ using UniRx;
 using System;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     [SerializeField] private CharacterManager _characterManager;
     [SerializeField] private Joystick _joystick;
     [SerializeField] private GameObject _enemyPrefab;
-    [SerializeField] private UIManager _uiManager;
 
+    private int killCount = 0;
     private List<IDisposable> observableList = new List<IDisposable>();
     private List<EnemySpawnData> enemySpawnDataList = new List<EnemySpawnData>()
     {
@@ -76,14 +76,14 @@ public class GameManager : MonoBehaviour
 
     public void Defeat() {
         Time.timeScale = 0;
-        _uiManager.SetUI(UIMode.Defeat);
+        UIManager.Instance.SetUI(UIMode.Defeat);
 
         DefeatWindowFactory.Create(new DefeatWindowRequest())
             .Do(_ => Time.timeScale = 1)
             .Do(res =>
             {
                 if (res.isContinue) {
-                    _uiManager.SetUI(UIMode.Playing);
+                    UIManager.Instance.SetUI(UIMode.Playing);
                 }
                 else
                 {
@@ -91,6 +91,22 @@ public class GameManager : MonoBehaviour
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
             })
+            .Subscribe();
+    }
+
+    public void KillTheEnemy()
+    {
+        killCount++;
+        if (killCount >= enemySpawnDataList.Count) Clear();
+    }
+
+    private void Clear() {
+        Time.timeScale = 0;
+        UIManager.Instance.SetUI(UIMode.Win);
+
+        ClearWindowFactory.Create(new ClearWindowRequest())
+            .Do(_ => Time.timeScale = 1)
+            .Do(_ => SceneManager.LoadScene(SceneManager.GetActiveScene().name))
             .Subscribe();
     }
 

@@ -7,10 +7,11 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _numText;
 
+    [HideInInspector] public EnemyData enemyData;
+
     private const float SPEED = 2;
     
     private int num;
-    private Vector3 moveDirection;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -30,25 +31,35 @@ public class EnemyManager : MonoBehaviour
     }
 
     public void TakeDamage(int damage) {
-        if (num - damage <= 0) Killed();
+        if (num - damage <= 0)
+        {
+            GameManager.Instance.AddScore(num);
+            Killed();
+        }
+        else
+        {
+            GameManager.Instance.AddScore(damage);
+            SetNum(num - damage);
+        }
 
-        SetNum(num - damage);
     }
 
     private void Killed() {
-        GameManager.Instance.KillTheEnemy();
+        enemyData.position = transform.position;
+        GameManager.Instance.KillTheEnemy(enemyData);
         Destroy(gameObject);
     }
 
     public void Move(Vector3 direction)
     {
-        moveDirection = direction.normalized;
+        enemyData.direction = direction.normalized;
         GetComponent<Rigidbody>().velocity = direction.normalized * SPEED;
+
     }
 
     private void Reflection(Collider other)
     {
-        Vector3 reflect = Vector3.Reflect(moveDirection, GetNormal(other.gameObject.tag));
+        Vector3 reflect = Vector3.Reflect(enemyData.direction, GetNormal(other.gameObject.tag));
         Move(reflect);
     }
 

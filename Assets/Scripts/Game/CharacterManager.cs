@@ -22,9 +22,13 @@ public class CharacterManager : MonoBehaviour
     private bool canFire = true;
     private int attack = 1;
     private List<Collider> rangeColliderList = new List<Collider>();
+    private Animator animator;
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
+        SetConditions(Conditions.isIdle);
+
         _body.OnTriggerEnterAsObservable()
             .Do(collider =>
             {
@@ -63,6 +67,8 @@ public class CharacterManager : MonoBehaviour
             .Subscribe();
     }
 
+    bool isIdle = true;
+
     private void FixedUpdate()
     {
         if (rangeColliderList.Count != 0)
@@ -74,6 +80,18 @@ public class CharacterManager : MonoBehaviour
         if (joystick != null && joystick.Direction != Vector2.zero)
         {
             Move();
+            if (isIdle) {
+                SetConditions(Conditions.isRun);
+                isIdle = false;
+            }
+
+        }
+        else
+        {
+            if (!isIdle) {
+                SetConditions(Conditions.isIdle);
+                isIdle = true;
+            }
         }
     }
 
@@ -149,5 +167,30 @@ public class CharacterManager : MonoBehaviour
             }
         };
         return closestCollider;
+    }
+
+    private void SetConditions(Conditions conditions) {
+        var conditionList = Enum.GetValues(typeof(Conditions));
+        foreach (var value in conditionList)
+        {
+            // GetNameメソッドでフィールドの値から名前を取得
+            var name = Enum.GetName(typeof(Conditions), value);
+            animator.SetBool(name, false);
+        }
+
+        animator.SetBool(conditions.ToString(), true);
+    }
+
+    private enum Conditions { 
+        isIdle,
+        isRun,
+        isStrafeBackward,
+        isStrafeBackwardLeft,
+        isStrafeBackwardRight,
+        isStrafeForward,
+        isStrafeForwardLeft,
+        isStrafeForwardRight,
+        isLeft,
+        isRight,
     }
 }

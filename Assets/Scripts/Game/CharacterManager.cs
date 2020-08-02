@@ -27,7 +27,6 @@ public class CharacterManager : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-        SetConditions(Conditions.isIdle);
 
         _body.OnTriggerEnterAsObservable()
             .Do(collider =>
@@ -67,32 +66,35 @@ public class CharacterManager : MonoBehaviour
             .Subscribe();
     }
 
-    bool isIdle = true;
-
     private void FixedUpdate()
     {
         if (rangeColliderList.Count != 0)
-        {
+        { 
             var closestCollider = GetClosestCollider();
             Fire(closestCollider.transform);
+
+            animator.SetBool(Condition.isAim.ToString(), true);
+        }
+        else 
+        {
+            animator.SetBool(Condition.isAim.ToString(), false);
         }
 
-        if (joystick != null && joystick.Direction != Vector2.zero)
+
+        if (joystick != null)
         {
             Move();
-            if (isIdle) {
-                SetConditions(Conditions.isRun);
-                isIdle = false;
-            }
+            SetDirectionToAnimator();
+        }
+    }
 
-        }
-        else
-        {
-            if (!isIdle) {
-                SetConditions(Conditions.isIdle);
-                isIdle = true;
-            }
-        }
+    private void SetDirectionToAnimator() {
+        var forward = transform.forward.normalized;
+
+        animator.SetFloat(Condition.left.ToString(), -joystick.Direction.x);
+        animator.SetFloat(Condition.right.ToString(), joystick.Direction.x);
+        animator.SetFloat(Condition.forward.ToString(), joystick.Direction.y);
+        animator.SetFloat(Condition.backward.ToString(), -joystick.Direction.y);
     }
 
     private void Move()
@@ -103,10 +105,17 @@ public class CharacterManager : MonoBehaviour
 
         if (vector == Vector3.zero) return;
         GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position + vector * MOVE_SPEED);
-        transform.rotation = Quaternion.LookRotation(vector);
+
+        if (!animator.GetBool(Condition.isAim.ToString()))
+        {
+            transform.rotation = Quaternion.LookRotation(vector);
+        }
     }
 
     private void Fire(Transform target) {
+        var vector = GetXZPlaneVector(target.position - transform.position);
+        transform.rotation = Quaternion.LookRotation(vector);
+
         if (!canFire) return;
         canFire = false;
         Observable.Timer(TimeSpan.FromSeconds(FIRE_INTERVAL))
@@ -169,28 +178,11 @@ public class CharacterManager : MonoBehaviour
         return closestCollider;
     }
 
-    private void SetConditions(Conditions conditions) {
-        var conditionList = Enum.GetValues(typeof(Conditions));
-        foreach (var value in conditionList)
-        {
-            // GetNameメソッドでフィールドの値から名前を取得
-            var name = Enum.GetName(typeof(Conditions), value);
-            animator.SetBool(name, false);
-        }
-
-        animator.SetBool(conditions.ToString(), true);
-    }
-
-    private enum Conditions { 
-        isIdle,
-        isRun,
-        isStrafeBackward,
-        isStrafeBackwardLeft,
-        isStrafeBackwardRight,
-        isStrafeForward,
-        isStrafeForwardLeft,
-        isStrafeForwardRight,
-        isLeft,
-        isRight,
+    private enum Condition { 
+        isAim,
+        left,
+        right,
+        forward,
+        backward,
     }
 }

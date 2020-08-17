@@ -16,7 +16,7 @@ public class CharacterManager : MonoBehaviour
     [HideInInspector] public GameManager gameManager;
 
     private const float MOVE_SPEED = 0.04f;
-    private const float BULLET_SPEED = 15f;
+    private const float BULLET_SPEED = 30f;
     private const float FIRE_INTERVAL = 0.5f;
 
     private bool canFire = true;

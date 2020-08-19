@@ -421,7 +421,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 169.41501, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6598575606783357309
@@ -1235,7 +1235,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 131.875, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5121722396644465923
@@ -4044,6 +4044,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dragIcon: {fileID: 4712310769607721742}
+  _rateButton: {fileID: 3479499276137813474}
+  _damageButton: {fileID: 3274671799102199188}
+  _coinButton: {fileID: 4777304575360118725}
+  _offlineRewardButton: {fileID: 4429077295869328470}
+  _titleText: {fileID: 3383317053007869158}
+  _valueText: {fileID: 8261440073242780029}
+  _upgradeButton: {fileID: 923943387986297865}
+  _upgradeCostText: {fileID: 2232786848887199917}
 --- !u!1 &7970409271407516658
 GameObject:
   m_ObjectHideFlags: 0

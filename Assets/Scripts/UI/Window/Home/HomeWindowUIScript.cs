@@ -6,6 +6,7 @@ using UniRx;
 using System;
 using UniRx.Triggers;
 using TMPro;
+using System.Linq;
 
 public class HomeWindowUIScript : WindowBase
 {
@@ -97,6 +98,7 @@ public class HomeWindowUIScript : WindowBase
     }
 
     private void SetStatusInfo() {
+        int level;
         string titleText;
         string valueText;
         string upgradeCostText;
@@ -104,24 +106,32 @@ public class HomeWindowUIScript : WindowBase
         switch (currentTabType)
         {
             case TabType.Rate:
+                level = SaveDataUtil.Status.GetRateLevel();
+                var rate = MasterRecords.GetRateMB().First(m => m.Level == level);
                 titleText = "RATE";
-                valueText = "LEVEL:" + SaveDataUtil.Status.GetRateLevel();
-                upgradeCostText = "10";
+                valueText = rate.Value + "/s";
+                upgradeCostText = rate.NextLevelCost.ToString();
                 break;
             case TabType.Damage:
+                level = SaveDataUtil.Status.GetDamageLevel();
+                var damage = MasterRecords.GetDamageMB().First(m => m.Level == level);
                 titleText = "DAMAGE";
-                valueText = "LEVEL:" + SaveDataUtil.Status.GetDamageLevel();
-                upgradeCostText = "10";
+                valueText = damage.Value.ToString();
+                upgradeCostText = damage.NextLevelCost.ToString();
                 break;
             case TabType.Coin:
+                level = SaveDataUtil.Status.GetCoinLevel();
+                var coin = MasterRecords.GetCoinMB().First(m => m.Level == level);
                 titleText = "COIN";
-                valueText = "LEVEL:" + SaveDataUtil.Status.GetCoinLevel();
-                upgradeCostText = "10";
+                valueText = "x " + coin.Value;
+                upgradeCostText = coin.NextLevelCost.ToString();
                 break;
             case TabType.OfflineReward:
+                level = SaveDataUtil.Status.GetOfflineRewardLevel();
+                var offlineReward = MasterRecords.GetOfflineRewardMB().First(m => m.Level == level);
                 titleText = "OFFLINE";
-                valueText = "LEVEL:" + SaveDataUtil.Status.GetOfflineRewardLevel();
-                upgradeCostText = "10";
+                valueText = offlineReward.Value + "/m";
+                upgradeCostText = offlineReward.NextLevelCost.ToString();
                 break;
             default:
                 titleText = "";

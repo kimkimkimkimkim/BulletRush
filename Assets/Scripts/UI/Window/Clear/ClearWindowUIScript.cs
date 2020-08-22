@@ -26,8 +26,8 @@ public class ClearWindowUIScript : WindowBase
     [SerializeField] private GameObject _nextButtonBase;
 
     private ClearResultData clearResultData;
-    private int possessionCoin = 1284;
-    private int possessionGem = 24;
+    private int possessionCoin;
+    private int possessionGem;
 
     public override void Init(Dictionary<string, object> param)
     {
@@ -36,6 +36,8 @@ public class ClearWindowUIScript : WindowBase
         var onClickBonus = (Action)param["onClickBonus"];
         var onClickNext = (Action)param["onClickNext"];
         clearResultData = (ClearResultData)param["clearResultData"];
+        possessionCoin = SaveDataUtil.Property.GetCoin();
+        possessionGem = SaveDataUtil.Property.GetGem();
 
         _possessionCoinText.text = possessionCoin.ToString();
         _possessionGemText.text = possessionGem.ToString();
@@ -62,7 +64,17 @@ public class ClearWindowUIScript : WindowBase
             })
             .Subscribe();
 
+        SaveData();
         PlayAnimation();
+    }
+
+    private void SaveData()
+    {
+        var coin = SaveDataUtil.Property.GetCoin();
+        var gem = SaveDataUtil.Property.GetGem();
+
+        SaveDataUtil.Property.SetCoin(coin + clearResultData.rewardCoin);
+        SaveDataUtil.Property.SetGem(gem + clearResultData.rewardGem);
     }
 
     private void PlayAnimation() {

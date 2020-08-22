@@ -18,6 +18,7 @@ public class ClearWindowFactory : MonoBehaviour
                 observer.OnNext(new ClearWindowResponse());
                 observer.OnCompleted();
             }));
+            param.Add("clearResultData", request.clearResultData);
 
             var window = (GameObject)Resources.Load("UI/Window/ClearWindow");
             UIManager.Instance.OpenWindow<ClearWindowUIScript>(window, param);

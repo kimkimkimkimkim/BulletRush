@@ -19,14 +19,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private List<EnemyData> enemyDataList = new List<EnemyData>()
     {
         new EnemyData(){time = 0,num = 3,position = new Vector3(1,0,3),direction = new Vector3(-1,0,-1),enemySize = EnemySize.Small},
-        new EnemyData(){time = 3,num = 4,position = new Vector3(-1,0,-3),direction = new Vector3(1,0,1),enemySize = EnemySize.Medium},
+        /*new EnemyData(){time = 3,num = 4,position = new Vector3(-1,0,-3),direction = new Vector3(1,0,1),enemySize = EnemySize.Medium},
         new EnemyData(){time = 6,num = 5,position = new Vector3(1,0,-3),direction = new Vector3(-1,0,1),enemySize = EnemySize.Medium},
-        new EnemyData(){time = 9,num = 6,position = new Vector3(-1,0,3),direction = new Vector3(1,0,-1),enemySize = EnemySize.Large},
-        new EnemyData(){time = 12,num = 10,position = new Vector3(1,0,3),direction = new Vector3(-1,0,1),enemySize = EnemySize.Medium},
-        new EnemyData(){time = 12,num = 10,position = new Vector3(-1,0,3),direction = new Vector3(1,0,-1),enemySize = EnemySize.Medium},
-        new EnemyData(){time = 12,num = 10,position = new Vector3(0,0,-3),direction = new Vector3(0.2f,0,-1),enemySize = EnemySize.Medium},
-        new EnemyData(){time = 20,num = 20,position = new Vector3(0,0,4),direction = new Vector3(0.2f,0,-1.5f),enemySize = EnemySize.Large},
-    };
+        new EnemyData(){time = 9,num = 6,position = new Vector3(-1,0,3),direction = new Vector3(1,0,-1),enemySize = EnemySize.Large},*/
+     };
 
     private void Start()
     {
@@ -189,7 +185,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         Time.timeScale = 0;
         UIManager.Instance.SetUI(UIMode.Win);
 
-        ClearWindowFactory.Create(new ClearWindowRequest())
+        Observable.ReturnUnit()
+            .Delay(TimeSpan.FromSeconds(0.05f), Scheduler.MainThreadIgnoreTimeScale)
+            .SelectMany(_ => ClearWindowFactory.Create(new ClearWindowRequest()
+            {
+                clearResultData = new ClearResultData() { rewardCoin = 1000,rewardGem = 10}
+            }))
             .Do(_ => Time.timeScale = 1)
             .Do(_ => SceneManager.LoadScene(SceneManager.GetActiveScene().name))
             .Subscribe();

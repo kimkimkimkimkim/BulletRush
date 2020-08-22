@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -12,4 +12,304 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c644532fa0a448699d5076fa65850cf, type: 3}
   m_Name: DamageMB
   m_EditorClassIdentifier: 
-  param: []
+  param:
+  - Level: 1
+    Value: 1
+    NextLevelCost: 10
+  - Level: 2
+    Value: 1.1
+    NextLevelCost: 20
+  - Level: 3
+    Value: 1.2
+    NextLevelCost: 30
+  - Level: 4
+    Value: 1.3
+    NextLevelCost: 40
+  - Level: 5
+    Value: 1.4
+    NextLevelCost: 50
+  - Level: 6
+    Value: 1.5
+    NextLevelCost: 60
+  - Level: 7
+    Value: 1.6
+    NextLevelCost: 70
+  - Level: 8
+    Value: 1.7
+    NextLevelCost: 80
+  - Level: 9
+    Value: 1.8
+    NextLevelCost: 90
+  - Level: 10
+    Value: 1.9
+    NextLevelCost: 100
+  - Level: 11
+    Value: 2
+    NextLevelCost: 110
+  - Level: 12
+    Value: 2.1
+    NextLevelCost: 120
+  - Level: 13
+    Value: 2.2
+    NextLevelCost: 130
+  - Level: 14
+    Value: 2.3
+    NextLevelCost: 140
+  - Level: 15
+    Value: 2.4
+    NextLevelCost: 150
+  - Level: 16
+    Value: 2.5
+    NextLevelCost: 160
+  - Level: 17
+    Value: 2.6
+    NextLevelCost: 170
+  - Level: 18
+    Value: 2.7
+    NextLevelCost: 180
+  - Level: 19
+    Value: 2.8
+    NextLevelCost: 190
+  - Level: 20
+    Value: 2.9
+    NextLevelCost: 200
+  - Level: 21
+    Value: 3
+    NextLevelCost: 210
+  - Level: 22
+    Value: 3.1
+    NextLevelCost: 220
+  - Level: 23
+    Value: 3.2
+    NextLevelCost: 230
+  - Level: 24
+    Value: 3.3
+    NextLevelCost: 240
+  - Level: 25
+    Value: 3.4
+    NextLevelCost: 250
+  - Level: 26
+    Value: 3.5
+    NextLevelCost: 260
+  - Level: 27
+    Value: 3.6
+    NextLevelCost: 270
+  - Level: 28
+    Value: 3.7
+    NextLevelCost: 280
+  - Level: 29
+    Value: 3.8
+    NextLevelCost: 290
+  - Level: 30
+    Value: 3.9
+    NextLevelCost: 300
+  - Level: 31
+    Value: 4
+    NextLevelCost: 310
+  - Level: 32
+    Value: 4.1
+    NextLevelCost: 320
+  - Level: 33
+    Value: 4.2
+    NextLevelCost: 330
+  - Level: 34
+    Value: 4.3
+    NextLevelCost: 340
+  - Level: 35
+    Value: 4.4
+    NextLevelCost: 350
+  - Level: 36
+    Value: 4.5
+    NextLevelCost: 360
+  - Level: 37
+    Value: 4.6
+    NextLevelCost: 370
+  - Level: 38
+    Value: 4.7
+    NextLevelCost: 380
+  - Level: 39
+    Value: 4.8
+    NextLevelCost: 390
+  - Level: 40
+    Value: 4.9
+    NextLevelCost: 400
+  - Level: 41
+    Value: 5
+    NextLevelCost: 410
+  - Level: 42
+    Value: 5.1
+    NextLevelCost: 420
+  - Level: 43
+    Value: 5.2
+    NextLevelCost: 430
+  - Level: 44
+    Value: 5.3
+    NextLevelCost: 440
+  - Level: 45
+    Value: 5.4
+    NextLevelCost: 450
+  - Level: 46
+    Value: 5.5
+    NextLevelCost: 460
+  - Level: 47
+    Value: 5.6
+    NextLevelCost: 470
+  - Level: 48
+    Value: 5.7
+    NextLevelCost: 480
+  - Level: 49
+    Value: 5.8
+    NextLevelCost: 490
+  - Level: 50
+    Value: 5.9
+    NextLevelCost: 500
+  - Level: 51
+    Value: 6
+    NextLevelCost: 510
+  - Level: 52
+    Value: 6.1
+    NextLevelCost: 520
+  - Level: 53
+    Value: 6.2
+    NextLevelCost: 530
+  - Level: 54
+    Value: 6.3
+    NextLevelCost: 540
+  - Level: 55
+    Value: 6.4
+    NextLevelCost: 550
+  - Level: 56
+    Value: 6.5
+    NextLevelCost: 560
+  - Level: 57
+    Value: 6.6
+    NextLevelCost: 570
+  - Level: 58
+    Value: 6.7
+    NextLevelCost: 580
+  - Level: 59
+    Value: 6.8
+    NextLevelCost: 590
+  - Level: 60
+    Value: 6.9
+    NextLevelCost: 600
+  - Level: 61
+    Value: 7
+    NextLevelCost: 610
+  - Level: 62
+    Value: 7.1
+    NextLevelCost: 620
+  - Level: 63
+    Value: 7.2
+    NextLevelCost: 630
+  - Level: 64
+    Value: 7.3
+    NextLevelCost: 640
+  - Level: 65
+    Value: 7.4
+    NextLevelCost: 650
+  - Level: 66
+    Value: 7.5
+    NextLevelCost: 660
+  - Level: 67
+    Value: 7.6
+    NextLevelCost: 670
+  - Level: 68
+    Value: 7.7
+    NextLevelCost: 680
+  - Level: 69
+    Value: 7.8
+    NextLevelCost: 690
+  - Level: 70
+    Value: 7.9
+    NextLevelCost: 700
+  - Level: 71
+    Value: 8
+    NextLevelCost: 710
+  - Level: 72
+    Value: 8.1
+    NextLevelCost: 720
+  - Level: 73
+    Value: 8.2
+    NextLevelCost: 730
+  - Level: 74
+    Value: 8.3
+    NextLevelCost: 740
+  - Level: 75
+    Value: 8.4
+    NextLevelCost: 750
+  - Level: 76
+    Value: 8.5
+    NextLevelCost: 760
+  - Level: 77
+    Value: 8.6
+    NextLevelCost: 770
+  - Level: 78
+    Value: 8.7
+    NextLevelCost: 780
+  - Level: 79
+    Value: 8.8
+    NextLevelCost: 790
+  - Level: 80
+    Value: 8.9
+    NextLevelCost: 800
+  - Level: 81
+    Value: 9
+    NextLevelCost: 810
+  - Level: 82
+    Value: 9.1
+    NextLevelCost: 820
+  - Level: 83
+    Value: 9.2
+    NextLevelCost: 830
+  - Level: 84
+    Value: 9.3
+    NextLevelCost: 840
+  - Level: 85
+    Value: 9.4
+    NextLevelCost: 850
+  - Level: 86
+    Value: 9.5
+    NextLevelCost: 860
+  - Level: 87
+    Value: 9.6
+    NextLevelCost: 870
+  - Level: 88
+    Value: 9.7
+    NextLevelCost: 880
+  - Level: 89
+    Value: 9.8
+    NextLevelCost: 890
+  - Level: 90
+    Value: 9.9
+    NextLevelCost: 900
+  - Level: 91
+    Value: 10
+    NextLevelCost: 910
+  - Level: 92
+    Value: 10.1
+    NextLevelCost: 920
+  - Level: 93
+    Value: 10.2
+    NextLevelCost: 930
+  - Level: 94
+    Value: 10.3
+    NextLevelCost: 940
+  - Level: 95
+    Value: 10.4
+    NextLevelCost: 950
+  - Level: 96
+    Value: 10.5
+    NextLevelCost: 960
+  - Level: 97
+    Value: 10.6
+    NextLevelCost: 970
+  - Level: 98
+    Value: 10.7
+    NextLevelCost: 980
+  - Level: 99
+    Value: 10.8
+    NextLevelCost: 990
+  - Level: 100
+    Value: 10.9
+    NextLevelCost: 1000

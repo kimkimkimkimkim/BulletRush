@@ -57,4 +57,38 @@
         }
         #endregion
     }
+
+    public static class Property
+    {
+        #region KEY
+        private const string COIN = "coin";
+        private const string GEM = "gem";
+        #endregion
+
+        #region GET
+        public static int GetCoin()
+        {
+            return SaveData.GetInt(COIN, 0);
+        }
+
+        public static int GetGem()
+        {
+            return SaveData.GetInt(GEM, 0);
+        }
+        #endregion
+
+        #region SET
+        public static void SetCoin(int coin)
+        {
+            SaveData.SetInt(COIN, coin);
+            SaveData.Save();
+        }
+
+        public static void SetGem(int gem)
+        {
+            SaveData.SetInt(GEM, gem);
+            SaveData.Save();
+        }
+        #endregion
+    }
 }

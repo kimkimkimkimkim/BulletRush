@@ -9,8 +9,8 @@ using NPOI.SS.UserModel;
 
 public class MasterRecords_importer : AssetPostprocessor
 {
-    private static readonly string filePath = "Assets/ExcelData/MasterRecords.xlsx";
-    private static readonly string[] sheetNames = { "OfflineRewardMB", };
+    private static readonly string filePath = "Assets/Resources/MasterRecords/MasterRecords.xlsx";
+    private static readonly string[] sheetNames = { "RateMB", };
     
     static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
     {
@@ -30,13 +30,13 @@ public class MasterRecords_importer : AssetPostprocessor
 
                 foreach (string sheetName in sheetNames)
                 {
-                    var exportPath = "Assets/ExcelData/" + sheetName + ".asset";
+                    var exportPath = "Assets/Resources/MasterRecords/" + sheetName + ".asset";
                     
                     // check scriptable object
-                    var data = (OfflineRewardMB)AssetDatabase.LoadAssetAtPath(exportPath, typeof(OfflineRewardMB));
+                    var data = (RateMB)AssetDatabase.LoadAssetAtPath(exportPath, typeof(RateMB));
                     if (data == null)
                     {
-                        data = ScriptableObject.CreateInstance<OfflineRewardMB>();
+                        data = ScriptableObject.CreateInstance<RateMB>();
                         AssetDatabase.CreateAsset((ScriptableObject)data, exportPath);
                         data.hideFlags = HideFlags.NotEditable;
                     }
@@ -56,7 +56,7 @@ public class MasterRecords_importer : AssetPostprocessor
                         IRow row = sheet.GetRow(i);
                         ICell cell = null;
                         
-                        var p = new OfflineRewardMB.Param();
+                        var p = new RateMB.Param();
 			
 					cell = row.GetCell(0); p.Level = (int)(cell == null ? 0 : cell.NumericCellValue);
 					cell = row.GetCell(1); p.Value = (float)(cell == null ? 0 : cell.NumericCellValue);

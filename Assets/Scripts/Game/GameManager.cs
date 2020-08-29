@@ -11,14 +11,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField] private Joystick _joystick;
     [SerializeField] private List<GameObject> _enemyPrefabList;
 
-    [HideInInspector] public int score;
-    [HideInInspector] public int stageClearScore;
+    [HideInInspector] public float score;
+    [HideInInspector] public float stageClearScore;
 
     private GameWindowUIScript gameWindowUIScript;
     private List<IDisposable> observableList = new List<IDisposable>();
     private List<EnemyData> enemyDataList = new List<EnemyData>()
     {
-        new EnemyData(){time = 0,num = 3,position = new Vector3(1,0,3),direction = new Vector3(-1,0,-1),enemySize = EnemySize.Small},
+        new EnemyData(){time = 0,health = 10,position = new Vector3(1,0,3),direction = new Vector3(-1,0,-1),enemySize = EnemySize.Small},
         /*new EnemyData(){time = 3,num = 4,position = new Vector3(-1,0,-3),direction = new Vector3(1,0,1),enemySize = EnemySize.Medium},
         new EnemyData(){time = 6,num = 5,position = new Vector3(1,0,-3),direction = new Vector3(-1,0,1),enemySize = EnemySize.Medium},
         new EnemyData(){time = 9,num = 6,position = new Vector3(-1,0,3),direction = new Vector3(1,0,-1),enemySize = EnemySize.Large},*/
@@ -50,7 +50,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         var score = 0;
         enemyDataList.ForEach(enemyData =>
         {
-            score +=  GetTotalNum(enemyData.num,enemyData.enemySize);
+            score +=  GetTotalNum((int)enemyData.health,enemyData.enemySize);
         });
         return score;
     }
@@ -89,7 +89,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
         var enemyManager = enemy.GetComponent<EnemyManager>();
         enemyManager.enemyData = enemyData;
-        enemyManager.SetNum(enemyData.num);
+        enemyManager.SetNum(enemyData.health);
         enemyManager.Move(enemyData.direction);
     }
 
@@ -122,7 +122,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             .Subscribe();
     }
 
-    public void AddScore(int damage)
+    public void AddScore(float damage)
     {
         if (gameWindowUIScript == null) SetGameWindowUIScript();
 
@@ -153,11 +153,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         var direction = enemyData.direction;
         var direction1 = Quaternion.Euler(0, 45, 0) * direction;
         var direction2 = Quaternion.Euler(0, -45, 0) * direction;
-        var num = GetSplitNum(enemyData.num);
+        var num = GetSplitNum((int)enemyData.health);
         var size = GetOneLankLowerSize(enemyData.enemySize);
 
-        var enemy1 = new EnemyData() { num = num, position = enemyData.position, direction = direction1, enemySize = size };
-        var enemy2 = new EnemyData() { num = num, position = enemyData.position, direction = direction2, enemySize = size };
+        var enemy1 = new EnemyData() { health = num, position = enemyData.position, direction = direction1, enemySize = size };
+        var enemy2 = new EnemyData() { health = num, position = enemyData.position, direction = direction2, enemySize = size };
         CreateEnemy(enemy1);
         CreateEnemy(enemy2);
     }

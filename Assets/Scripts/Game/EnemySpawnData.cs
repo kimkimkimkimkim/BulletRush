@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyData
 {
     public float time { get; set; }
-    public int num { get; set; }
+    public float health { get; set; }
     public Vector3 position { get; set; }
     public Vector3 direction { get; set; }
     public EnemySize enemySize { get; set; }

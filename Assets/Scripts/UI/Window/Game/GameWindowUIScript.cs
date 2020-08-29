@@ -30,9 +30,9 @@ public class GameWindowUIScript : WindowBase
         _scoreSlider.value = 0;
     }
 
-    public void SetScore(int score)
+    public void SetScore(float score)
     {
-        _scoreText.text = score.ToString();
+        _scoreText.text = Math.Floor(score).ToString();
         _scoreSlider.value = score;
     }
 }

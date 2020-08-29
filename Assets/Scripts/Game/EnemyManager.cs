@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -10,8 +11,8 @@ public class EnemyManager : MonoBehaviour
     [HideInInspector] public EnemyData enemyData;
 
     private const float SPEED = 2;
-    
-    private int num;
+
+    private float health;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -25,21 +26,22 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    public void SetNum(int num) {
-        this.num = num;
-        _numText.text = num.ToString();
+    public void SetNum(float health) {
+        this.health = health;
+        _numText.text = Math.Ceiling(health).ToString();
     }
 
-    public void TakeDamage(int damage) {
-        if (num - damage <= 0)
+    public void TakeDamage(float damage) {
+        if (health - damage <= 0)
         {
-            GameManager.Instance.AddScore(num);
+            GameManager.Instance.AddScore(health);
             Killed();
         }
         else
         {
+            
             GameManager.Instance.AddScore(damage);
-            SetNum(num - damage);
+            SetNum(health - damage);
         }
 
     }

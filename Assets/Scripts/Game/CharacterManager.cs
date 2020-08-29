@@ -4,6 +4,7 @@ using UnityEngine;
 using UniRx.Triggers;
 using UniRx;
 using System;
+using System.Linq;
 
 public class CharacterManager : MonoBehaviour
 {
@@ -17,15 +18,17 @@ public class CharacterManager : MonoBehaviour
 
     private const float MOVE_SPEED = 0.04f;
     private const float BULLET_SPEED = 30f;
-    private const float FIRE_INTERVAL = 0.5f;
 
     private bool canFire = true;
-    private int attack = 1;
     private List<Collider> rangeColliderList = new List<Collider>();
     private Animator animator;
+    private float damage;
+    private float fireInterval;
 
     private void Start()
     {
+        SetStatus();
+
         animator = GetComponent<Animator>();
 
         _body.OnTriggerEnterAsObservable()
@@ -64,6 +67,16 @@ public class CharacterManager : MonoBehaviour
                 }
             })
             .Subscribe();
+    }
+
+    private void SetStatus()
+    {
+        var damageLevel = SaveDataUtil.Status.GetDamageLevel();
+        var rateLevel = SaveDataUtil.Status.GetRateLevel();
+
+        damage = MasterRecords.GetDamageMB().First(m => m.Level == damageLevel).Value;
+        var rate = MasterRecords.GetRateMB().First(m => m.Level == rateLevel).Value;
+        fireInterval = 1 / rate;
     }
 
     private void FixedUpdate()
@@ -118,7 +131,7 @@ public class CharacterManager : MonoBehaviour
 
         if (!canFire) return;
         canFire = false;
-        Observable.Timer(TimeSpan.FromSeconds(FIRE_INTERVAL))
+        Observable.Timer(TimeSpan.FromSeconds(fireInterval))
             .Do(_ => canFire = true)
             .Subscribe();
 
@@ -140,7 +153,7 @@ public class CharacterManager : MonoBehaviour
                         Destroy(bullet);
                         break;
                     case "Enemy":
-                        collider.GetComponent<EnemyManager>().TakeDamage(attack);
+                        collider.GetComponent<EnemyManager>().TakeDamage(damage);
                         Destroy(bullet);
                         break;
                     default:

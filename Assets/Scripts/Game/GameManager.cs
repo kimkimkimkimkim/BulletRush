@@ -31,8 +31,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void GameStart()
     {
-        // TODO : PlayerPrefsから現在のステージの取得
-        var stageId = 3;
+        var stageId = SaveDataUtil.Status.GetClearedStageId() + 1;
         var enemySpawnDataList = MasterRecords.GetEnemySpawnDataList(stageId);
 
         stageClearScore = GetStageClearScore(enemySpawnDataList);
@@ -183,7 +182,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         Time.timeScale = 0;
         UIManager.Instance.SetUI(UIMode.Win);
 
-        var stageId = 3;
+        var stageId = SaveDataUtil.Status.GetClearedStageId() + 1;
         var stage = MasterRecords.GetStageMB().FirstOrDefault(m => m.Id == stageId);
         if (stage == null) stage = new StageMB.Param() { RewardCoin = 100, RewardGem = 0};
 

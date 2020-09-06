@@ -10,6 +10,7 @@ using System.Linq;
 
 public class HomeWindowUIScript : WindowBase
 {
+    [SerializeField] private TextMeshProUGUI _stageText;
     [SerializeField] private TextMeshProUGUI _coinText;
     [SerializeField] private TextMeshProUGUI _gemText;
     [SerializeField] private GameObject _dragIcon;
@@ -62,6 +63,7 @@ public class HomeWindowUIScript : WindowBase
             .Do(_ => OnClickUpgradeButtonAction())
             .Subscribe();
 
+        SetStageInfo();
         SetPropertyInfo();
         SetStatusInfo();
     }
@@ -113,6 +115,11 @@ public class HomeWindowUIScript : WindowBase
 
         SetPropertyInfo();
         SetStatusInfo();
+    }
+
+    private void SetStageInfo() {
+        var clearedStageId = SaveDataUtil.Status.GetClearedStageId();
+        _stageText.text = "STAGE " + (clearedStageId + 1);
     }
 
     private void SetPropertyInfo()

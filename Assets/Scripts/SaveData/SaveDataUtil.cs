@@ -3,6 +3,7 @@
     public static class Status
     {
         #region KEY
+        private const string CLEARED_STAGE_ID = "cleared_stage_id";
         private const string RATE_LEVEL = "rate_level";
         private const string DAMAGE_LEVEL = "damage_level";
         private const string COIN_LEVEL = "coin_level";
@@ -10,6 +11,11 @@
         #endregion
 
         #region GET
+        public static int GetClearedStageId()
+        {
+            return SaveData.GetInt(CLEARED_STAGE_ID, 0);
+        }
+
         public static int GetRateLevel() 
         {
             return SaveData.GetInt(RATE_LEVEL, 1);
@@ -32,6 +38,12 @@
         #endregion
 
         #region SET
+        public static void SetClearedStageId(int stageId)
+        {
+            SaveData.SetInt(CLEARED_STAGE_ID, stageId);
+            SaveData.Save();
+        }
+
         public static void SetRateLevel(int rateLevel)
         {
             SaveData.SetInt(RATE_LEVEL, rateLevel);

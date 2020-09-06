@@ -4193,6 +4193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 782b33577292b4f139847f221ae9bec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stageText: {fileID: 8691865311757317443}
   _coinText: {fileID: 481439666676128996}
   _gemText: {fileID: 7229090217950860750}
   _dragIcon: {fileID: 4712310769607721742}

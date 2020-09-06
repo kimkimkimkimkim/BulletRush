@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -10,6 +10,269 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3a8c0647686a472599f8a09ed415285, type: 3}
-  m_Name: EnemySpawnExcelData
+  m_Name: EnemySpawnDataMB
   m_EditorClassIdentifier: 
-  sheets: []
+  sheets:
+  - name: Stage1
+    list:
+    - time: 0
+      health: 5
+      positionX: 1
+      positionY: 0
+      positionZ: 3
+      directionX: -1
+      directionY: 0
+      directionZ: -1
+      enemySize: Small
+  - name: Stage2
+    list:
+    - time: 0
+      health: 5
+      positionX: 1
+      positionY: 0
+      positionZ: 3
+      directionX: -1
+      directionY: 0
+      directionZ: -1
+      enemySize: Small
+    - time: 0.3
+      health: 10
+      positionX: -1
+      positionY: 0
+      positionZ: -3
+      directionX: 1
+      directionY: 0
+      directionZ: 1
+      enemySize: Small
+  - name: Stage3
+    list:
+    - time: 0
+      health: 5
+      positionX: 1
+      positionY: 0
+      positionZ: 3
+      directionX: -1
+      directionY: 0
+      directionZ: -1
+      enemySize: Small
+    - time: 0.3
+      health: 5
+      positionX: -1
+      positionY: 0
+      positionZ: -3
+      directionX: 1
+      directionY: 0
+      directionZ: 1
+      enemySize: Small
+    - time: 1
+      health: 5
+      positionX: 1
+      positionY: 0
+      positionZ: 0
+      directionX: -1
+      directionY: 0
+      directionZ: -0.5
+      enemySize: Small
+  - name: Stage4
+    list:
+    - time: 0
+      health: 5
+      positionX: 1
+      positionY: 0
+      positionZ: 3
+      directionX: -1
+      directionY: 0
+      directionZ: -1
+      enemySize: Small
+    - time: 0.5
+      health: 8
+      positionX: -1
+      positionY: 0
+      positionZ: -3
+      directionX: 1
+      directionY: 0
+      directionZ: 1
+      enemySize: Medium
+    - time: 1
+      health: 10
+      positionX: 1
+      positionY: 0
+      positionZ: 3
+      directionX: -1
+      directionY: 0
+      directionZ: -1
+      enemySize: Small
+  - name: Stage5
+    list:
+    - time: 0
+      health: 5
+      positionX: 1
+      positionY: 0
+      positionZ: 3
+      directionX: -1
+      directionY: 0
+      directionZ: -1
+      enemySize: Small
+    - time: 0.5
+      health: 8
+      positionX: -1
+      positionY: 0
+      positionZ: -3
+      directionX: 1
+      directionY: 0
+      directionZ: 1
+      enemySize: Large
+    - time: 1
+      health: 10
+      positionX: 1
+      positionY: 0
+      positionZ: 3
+      directionX: -1
+      directionY: 0
+      directionZ: -1
+      enemySize: Medium
+  - name: Stage6
+    list:
+    - time: 0
+      health: 5
+      positionX: 1
+      positionY: 0
+      positionZ: 3
+      directionX: -1
+      directionY: 0
+      directionZ: -1
+      enemySize: Small
+    - time: 0.5
+      health: 8
+      positionX: -1
+      positionY: 0
+      positionZ: -3
+      directionX: 1
+      directionY: 0
+      directionZ: 1
+      enemySize: Medium
+    - time: 1
+      health: 10
+      positionX: 1
+      positionY: 0
+      positionZ: 3
+      directionX: -1
+      directionY: 0
+      directionZ: -1
+      enemySize: Small
+  - name: Stage7
+    list:
+    - time: 0
+      health: 5
+      positionX: 1
+      positionY: 0
+      positionZ: 3
+      directionX: -1
+      directionY: 0
+      directionZ: -1
+      enemySize: Small
+    - time: 0.5
+      health: 8
+      positionX: -1
+      positionY: 0
+      positionZ: -3
+      directionX: 1
+      directionY: 0
+      directionZ: 1
+      enemySize: Medium
+    - time: 1
+      health: 10
+      positionX: 1
+      positionY: 0
+      positionZ: 3
+      directionX: -1
+      directionY: 0
+      directionZ: -1
+      enemySize: Small
+  - name: Stage8
+    list:
+    - time: 0
+      health: 5
+      positionX: 1
+      positionY: 0
+      positionZ: 3
+      directionX: -1
+      directionY: 0
+      directionZ: -1
+      enemySize: Small
+    - time: 0.5
+      health: 8
+      positionX: -1
+      positionY: 0
+      positionZ: -3
+      directionX: 1
+      directionY: 0
+      directionZ: 1
+      enemySize: Medium
+    - time: 1
+      health: 10
+      positionX: 1
+      positionY: 0
+      positionZ: 3
+      directionX: -1
+      directionY: 0
+      directionZ: -1
+      enemySize: Small
+  - name: Stage9
+    list:
+    - time: 0
+      health: 5
+      positionX: 1
+      positionY: 0
+      positionZ: 3
+      directionX: -1
+      directionY: 0
+      directionZ: -1
+      enemySize: Small
+    - time: 0.5
+      health: 8
+      positionX: -1
+      positionY: 0
+      positionZ: -3
+      directionX: 1
+      directionY: 0
+      directionZ: 1
+      enemySize: Medium
+    - time: 1
+      health: 10
+      positionX: 1
+      positionY: 0
+      positionZ: 3
+      directionX: -1
+      directionY: 0
+      directionZ: -1
+      enemySize: Small
+  - name: Stage10
+    list:
+    - time: 0
+      health: 5
+      positionX: 1
+      positionY: 0
+      positionZ: 3
+      directionX: -1
+      directionY: 0
+      directionZ: -1
+      enemySize: Small
+    - time: 0.5
+      health: 8
+      positionX: -1
+      positionY: 0
+      positionZ: -3
+      directionX: 1
+      directionY: 0
+      directionZ: 1
+      enemySize: Medium
+    - time: 1
+      health: 10
+      positionX: 1
+      positionY: 0
+      positionZ: 3
+      directionX: -1
+      directionY: 0
+      directionZ: -1
+      enemySize: Small

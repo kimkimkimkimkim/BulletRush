@@ -4,6 +4,7 @@ using UnityEngine;
 using UniRx;
 using System;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
@@ -16,13 +17,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private GameWindowUIScript gameWindowUIScript;
     private List<IDisposable> observableList = new List<IDisposable>();
-    private List<EnemyData> enemyDataList = new List<EnemyData>()
-    {
-        new EnemyData(){time = 0,health = 10,position = new Vector3(1,0,3),direction = new Vector3(-1,0,-1),enemySize = EnemySize.Small},
-        /*new EnemyData(){time = 3,num = 4,position = new Vector3(-1,0,-3),direction = new Vector3(1,0,1),enemySize = EnemySize.Medium},
-        new EnemyData(){time = 6,num = 5,position = new Vector3(1,0,-3),direction = new Vector3(-1,0,1),enemySize = EnemySize.Medium},
-        new EnemyData(){time = 9,num = 6,position = new Vector3(-1,0,3),direction = new Vector3(1,0,-1),enemySize = EnemySize.Large},*/
-     };
 
     private void Start()
     {
@@ -37,9 +31,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void GameStart()
     {
-        stageClearScore = GetStageClearScore(enemyDataList);
+        // TODO : PlayerPrefsから現在のステージの取得
+        var stageId = 3;
+        var enemySpawnDataList = MasterRecords.GetEnemySpawnDataList(stageId);
+
+        stageClearScore = GetStageClearScore(enemySpawnDataList);
         score = 0;
-        CreateEnemy(enemyDataList);
+        CreateEnemy(enemySpawnDataList);
 
         GameWindowFactory.Create(new GameWindowRequest())
             .Subscribe();
@@ -185,11 +183,15 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         Time.timeScale = 0;
         UIManager.Instance.SetUI(UIMode.Win);
 
+        var stageId = 3;
+        var stage = MasterRecords.GetStageMB().FirstOrDefault(m => m.Id == stageId);
+        if (stage == null) stage = new StageMB.Param() { RewardCoin = 100, RewardGem = 0};
+
         Observable.ReturnUnit()
             .Delay(TimeSpan.FromSeconds(0.05f), Scheduler.MainThreadIgnoreTimeScale)
             .SelectMany(_ => ClearWindowFactory.Create(new ClearWindowRequest()
             {
-                clearResultData = new ClearResultData() { rewardCoin = 1000,rewardGem = 10}
+                clearResultData = new ClearResultData() { rewardCoin = stage.RewardCoin,rewardGem = stage.RewardGem}
             }))
             .Do(_ => Time.timeScale = 1)
             .Do(_ => SceneManager.LoadScene(SceneManager.GetActiveScene().name))

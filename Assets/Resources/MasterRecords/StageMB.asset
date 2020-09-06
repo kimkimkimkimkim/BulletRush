@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -10,6 +10,46 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d2b03a6d6bf94e7997ef8e741b11f65, type: 3}
-  m_Name: StageExcelData
+  m_Name: StageMB
   m_EditorClassIdentifier: 
-  sheets: []
+  param:
+  - Id: 1
+    EnemySpawnDataSheetIndex: 0
+    RewardGem: 0
+    RewardCoin: 100
+  - Id: 2
+    EnemySpawnDataSheetIndex: 1
+    RewardGem: 0
+    RewardCoin: 200
+  - Id: 3
+    EnemySpawnDataSheetIndex: 2
+    RewardGem: 0
+    RewardCoin: 300
+  - Id: 4
+    EnemySpawnDataSheetIndex: 3
+    RewardGem: 0
+    RewardCoin: 400
+  - Id: 5
+    EnemySpawnDataSheetIndex: 4
+    RewardGem: 5
+    RewardCoin: 500
+  - Id: 6
+    EnemySpawnDataSheetIndex: 5
+    RewardGem: 0
+    RewardCoin: 600
+  - Id: 7
+    EnemySpawnDataSheetIndex: 6
+    RewardGem: 0
+    RewardCoin: 700
+  - Id: 8
+    EnemySpawnDataSheetIndex: 7
+    RewardGem: 0
+    RewardCoin: 800
+  - Id: 9
+    EnemySpawnDataSheetIndex: 8
+    RewardGem: 0
+    RewardCoin: 900
+  - Id: 10
+    EnemySpawnDataSheetIndex: 9
+    RewardGem: 10
+    RewardCoin: 1000

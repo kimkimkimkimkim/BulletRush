@@ -5,12 +5,14 @@ using UniRx;
 using System;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using DG.Tweening;
 
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     [SerializeField] private CharacterManager _characterManager;
     [SerializeField] private Joystick _joystick;
     [SerializeField] private List<GameObject> _enemyPrefabList;
+    [SerializeField] private GameObject _spawnCircle;
 
     [HideInInspector] public float score;
     [HideInInspector] public float stageClearScore;
@@ -72,10 +74,20 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         enemyDataList.ForEach(enemyData =>
         {
             var observable = Observable.Timer(TimeSpan.FromSeconds(enemyData.time))
+                .SelectMany(_ => PlaySpawnCircleAnimationObservable(enemyData.position))
                 .Do(_ => CreateEnemy(enemyData))
                 .Subscribe();
             observableList.Add(observable);
         });
+    }
+
+    private IObservable<Unit> PlaySpawnCircleAnimationObservable(Vector3 position) {
+        var y = 1f;
+        var spawnCircle = (GameObject)Instantiate(_spawnCircle);
+        spawnCircle.transform.position = new Vector3(position.x, y, position.z);
+        spawnCircle.GetComponent<SpawnCircleManager>().SetAlpha(0);
+
+        return spawnCircle.GetComponent<SpawnCircleManager>().PlayAnimationObservable();
     }
 
     private void CreateEnemy(EnemyData enemyData)

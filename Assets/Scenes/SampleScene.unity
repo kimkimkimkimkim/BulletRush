@@ -687,6 +687,8 @@ MonoBehaviour:
   - {fileID: 7437335558225629985, guid: db12f0c485124488f9811989f150d254, type: 3}
   - {fileID: 6977225705057559405, guid: 38b4445c9ebb64cbf99f1aa3c81d21d2, type: 3}
   - {fileID: 3091262757747494842, guid: baa3aab04b7884f84996ff62e5345bc3, type: 3}
+  _spawnCircle: {fileID: 362640608692317128, guid: e8ca17cecaa324b1eaa7b0294766d792,
+    type: 3}
   score: 0
   stageClearScore: 0
 --- !u!4 &1676706585

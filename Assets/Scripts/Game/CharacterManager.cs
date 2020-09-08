@@ -18,12 +18,14 @@ public class CharacterManager : MonoBehaviour
 
     private const float MOVE_SPEED = 0.04f;
     private const float BULLET_SPEED = 30f;
+    private const float MAX_FIRE_INTERVAL = 0.1f;
 
     private bool canFire = true;
     private List<Collider> rangeColliderList = new List<Collider>();
     private Animator animator;
     private float damage;
     private float fireInterval;
+    private int fireRow;
 
     private void Start()
     {
@@ -76,7 +78,23 @@ public class CharacterManager : MonoBehaviour
 
         damage = MasterRecords.GetDamageMB().First(m => m.Level == damageLevel).Value;
         var rate = MasterRecords.GetRateMB().First(m => m.Level == rateLevel).Value;
-        fireInterval = 1 / rate;
+        var interval = 1 / rate;
+        var ratio = MAX_FIRE_INTERVAL / interval;
+
+        if (ratio > 1)
+        {
+            fireRow = (int)Math.Ceiling(ratio);
+            fireInterval = MAX_FIRE_INTERVAL * ((float)fireRow / ratio);
+        }
+        else
+        {
+            fireRow = 1;
+            fireInterval = interval;
+        }
+
+        Debug.Log("rate : " + rate);
+        Debug.Log("row : " + fireRow);
+        Debug.Log("inter : " + fireInterval);
     }
 
     private void FixedUpdate()

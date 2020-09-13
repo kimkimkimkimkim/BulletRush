@@ -29,8 +29,6 @@ public class CharacterManager : MonoBehaviour
 
     private void Start()
     {
-        SetStatus();
-
         animator = GetComponent<Animator>();
 
         _body.OnTriggerEnterAsObservable()
@@ -71,7 +69,7 @@ public class CharacterManager : MonoBehaviour
             .Subscribe();
     }
 
-    private void SetStatus()
+    public void SetStatus()
     {
         var damageLevel = SaveDataUtil.Status.GetDamageLevel();
         var rateLevel = SaveDataUtil.Status.GetRateLevel();

@@ -36,6 +36,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         var stageId = SaveDataUtil.Status.GetClearedStageId() + 1;
         var enemySpawnDataList = MasterRecords.GetEnemySpawnDataList(stageId);
 
+        _characterManager.SetStatus();
         stageClearScore = GetStageClearScore(enemySpawnDataList);
         score = 0;
         CreateEnemy(enemySpawnDataList);

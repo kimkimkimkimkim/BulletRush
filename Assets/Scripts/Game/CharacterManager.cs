@@ -91,10 +91,6 @@ public class CharacterManager : MonoBehaviour
             fireRow = 1;
             fireInterval = interval;
         }
-
-        Debug.Log("rate : " + rate);
-        Debug.Log("row : " + fireRow);
-        Debug.Log("inter : " + fireInterval);
     }
 
     private void FixedUpdate()
@@ -143,6 +139,19 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
+    private Vector3 GetBulletPosition(int index, int fireRow) {
+        const float POSITION_INTERVAL = 0.1f;
+
+        var isEven = fireRow % 2 == 0;
+        var muzzlePosition = _muzzle.transform.position;
+        var basePositionX = isEven
+            ? muzzlePosition.x - (POSITION_INTERVAL / 2) - (POSITION_INTERVAL * ((fireRow / 2) - 1))
+            : muzzlePosition.x - (POSITION_INTERVAL * ((fireRow / 2) - 1));
+        var bulletPositionX = basePositionX + (POSITION_INTERVAL * index);
+
+        return new Vector3(bulletPositionX, muzzlePosition.y, muzzlePosition.z);
+    }
+
     private void Fire(Transform target) {
         var vector = GetXZPlaneVector(target.position - transform.position);
         transform.rotation = Quaternion.LookRotation(vector);
@@ -154,31 +163,34 @@ public class CharacterManager : MonoBehaviour
             .Subscribe();
 
         var direction = GetXZPlaneVector(target.position - _muzzle.transform.position);
-        GameObject bullet = (GameObject)Instantiate(_bulletPrefab);
-        bullet.transform.position = _muzzle.transform.position;
-        bullet.transform.rotation = Quaternion.LookRotation(direction);
-        bullet.GetComponent<Rigidbody>().velocity = direction.normalized * BULLET_SPEED;
+        for (var i = 0; i < fireRow; i++)
+        {
+            GameObject bullet = (GameObject)Instantiate(_bulletPrefab);
+            bullet.transform.position = GetBulletPosition(i,fireRow);
+            bullet.transform.rotation = Quaternion.LookRotation(direction);
+            bullet.GetComponent<Rigidbody>().velocity = direction.normalized * BULLET_SPEED;
 
-        bullet.OnTriggerEnterAsObservable()
-            .Do(collider =>
-            {
-                switch (collider.gameObject.tag)
+            bullet.OnTriggerEnterAsObservable()
+                .Do(collider =>
                 {
-                    case "WallTop":
-                    case "WallRight":
-                    case "WallLeft":
-                    case "WallBottom":
-                        Destroy(bullet);
-                        break;
-                    case "Enemy":
-                        collider.GetComponent<EnemyManager>().TakeDamage(damage);
-                        Destroy(bullet);
-                        break;
-                    default:
-                        break;
-                }
-            })
-            .Subscribe();
+                    switch (collider.gameObject.tag)
+                    {
+                        case "WallTop":
+                        case "WallRight":
+                        case "WallLeft":
+                        case "WallBottom":
+                            Destroy(bullet);
+                            break;
+                        case "Enemy":
+                            collider.GetComponent<EnemyManager>().TakeDamage(damage);
+                            Destroy(bullet);
+                            break;
+                        default:
+                            break;
+                    }
+                })
+                .Subscribe();
+        }
     }
 
     private Vector3 GetXZPlaneVector(Vector3 vector)

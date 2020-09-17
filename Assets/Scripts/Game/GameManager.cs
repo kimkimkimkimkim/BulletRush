@@ -33,7 +33,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void GameStart()
     {
-        var stageId = SaveDataUtil.Status.GetClearedStageId() + 1;
+        var stageId = SaveDataUtil.Status.GetNextStageId();
         var enemySpawnDataList = MasterRecords.GetEnemySpawnDataList(stageId);
 
         _characterManager.SetStatus();
@@ -195,9 +195,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         Time.timeScale = 0;
         UIManager.Instance.SetUI(UIMode.Win);
 
-        var stageId = SaveDataUtil.Status.GetClearedStageId() + 1;
+        var stageId = SaveDataUtil.Status.GetNextStageId();
         var stage = MasterRecords.GetStageMB().FirstOrDefault(m => m.Id == stageId);
-        if (stage == null) stage = new StageMB.Param() { RewardCoin = 100, RewardGem = 0};
+        SaveDataUtil.Status.SetClearedStageId(stageId);
 
         Observable.ReturnUnit()
             .Delay(TimeSpan.FromSeconds(0.05f), Scheduler.MainThreadIgnoreTimeScale)

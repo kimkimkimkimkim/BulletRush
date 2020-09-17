@@ -118,8 +118,8 @@ public class HomeWindowUIScript : WindowBase
     }
 
     private void SetStageInfo() {
-        var clearedStageId = SaveDataUtil.Status.GetClearedStageId();
-        _stageText.text = "STAGE " + (clearedStageId + 1);
+        var nextStageId = SaveDataUtil.Status.GetNextStageId();
+        _stageText.text = "STAGE " + nextStageId;
     }
 
     private void SetPropertyInfo()

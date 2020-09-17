@@ -16,6 +16,20 @@
             return SaveData.GetInt(CLEARED_STAGE_ID, 0);
         }
 
+        public static int GetNextStageId()
+        {
+            var clearedStageId = GetClearedStageId();
+            var totalStageNum = MasterRecords.GetStageMB().Count;
+
+            if(clearedStageId >= totalStageNum) {
+                // クリアしているステージと全部のステージの個数が等しい場合
+                return clearedStageId;
+            }
+            else{
+                return clearedStageId + 1;
+            }
+        }
+
         public static int GetRateLevel() 
         {
             return SaveData.GetInt(RATE_LEVEL, 1);

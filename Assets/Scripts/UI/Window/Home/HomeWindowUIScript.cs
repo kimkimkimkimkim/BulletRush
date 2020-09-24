@@ -21,6 +21,7 @@ public class HomeWindowUIScript : WindowBase
     [SerializeField] private TextMeshProUGUI _titleText;
     [SerializeField] private TextMeshProUGUI _valueText;
     [SerializeField] private Button _upgradeButton;
+    [SerializeField] private List<Sprite> _buttonSpriteList;
     [SerializeField] private TextMeshProUGUI _upgradeCostText;
     [SerializeField] private GameObject _upgradeButtonGrayOutPanel;
 
@@ -43,23 +44,23 @@ public class HomeWindowUIScript : WindowBase
             })
             .Subscribe();
 
-        _rateButton.OnClickAsObservable()
+        _rateButton.OnClickIntentAsObservable()
             .Do(_ => OnClickTabAction(TabType.Rate))
             .Subscribe();
 
-        _damageButton.OnClickAsObservable()
+        _damageButton.OnClickIntentAsObservable()
             .Do(_ => OnClickTabAction(TabType.Damage))
             .Subscribe();
 
-        _coinButton.OnClickAsObservable()
+        _coinButton.OnClickIntentAsObservable()
             .Do(_ => OnClickTabAction(TabType.Coin))
             .Subscribe();
 
-        _offlineRewardButton.OnClickAsObservable()
+        _offlineRewardButton.OnClickIntentAsObservable()
             .Do(_ => OnClickTabAction(TabType.OfflineReward))
             .Subscribe();
 
-        _upgradeButton.OnClickAsObservable()
+        _upgradeButton.OnClickIntentAsObservable()
             .Do(_ => OnClickUpgradeButtonAction())
             .Subscribe();
 
@@ -173,7 +174,8 @@ public class HomeWindowUIScript : WindowBase
 
         _titleText.text = titleText;
         _valueText.text = valueText;
-        _upgradeCostText.text = upgradeCost.ToString();
+        _upgradeCostText.text = StatusUtil.GetCostText(upgradeCost);
+        _upgradeButton.GetComponent<Image>().sprite = _buttonSpriteList[(int)currentTabType - 1];
 
         // お金足りるかチェック
         var isEnough = upgradeCost <= SaveDataUtil.Property.GetCoin();
@@ -182,6 +184,7 @@ public class HomeWindowUIScript : WindowBase
 
     private enum TabType
     {
+        None = 0,
         Rate,
         Damage,
         Coin,

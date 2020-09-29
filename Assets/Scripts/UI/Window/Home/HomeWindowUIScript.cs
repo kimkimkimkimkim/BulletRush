@@ -7,6 +7,7 @@ using System;
 using UniRx.Triggers;
 using TMPro;
 using System.Linq;
+using DG.Tweening;
 
 public class HomeWindowUIScript : WindowBase
 {
@@ -26,6 +27,8 @@ public class HomeWindowUIScript : WindowBase
     [SerializeField] private GameObject _upgradeButtonGrayOutPanel;
 
     private TabType currentTabType = TabType.Rate;
+    private IDisposable coinTextObservable;
+    private IDisposable gemTextObservable;
 
     public override void Init(Dictionary<string, object> param)
     {
@@ -125,8 +128,19 @@ public class HomeWindowUIScript : WindowBase
 
     private void SetPropertyInfo()
     {
-        _coinText.text = SaveDataUtil.Property.GetCoin().ToString();
-        _gemText.text = SaveDataUtil.Property.GetGem().ToString();
+        if (coinTextObservable != null) coinTextObservable.Dispose();
+        if (gemTextObservable != null) gemTextObservable.Dispose();
+
+        const float ANIMATION_TIME = 0.5f;
+
+        var coin = int.Parse(_coinText.text);
+        var gem = int.Parse(_gemText.text);
+        coinTextObservable = DOTween.To(() => coin, x => _coinText.text = x.ToString(), SaveDataUtil.Property.GetCoin(), ANIMATION_TIME)
+            .OnCompleteAsObservable()
+            .Subscribe();
+        gemTextObservable = DOTween.To(() => gem,x => _gemText.text = x.ToString(),SaveDataUtil.Property.GetGem(),ANIMATION_TIME)
+            .OnCompleteAsObservable()
+            .Subscribe();
     }
 
     private void SetStatusInfo() {

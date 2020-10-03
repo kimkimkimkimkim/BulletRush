@@ -20,7 +20,8 @@ public class HomeWindowUIScript : WindowBase
     [SerializeField] private Button _coinButton;
     [SerializeField] private Button _offlineRewardButton;
     [SerializeField] private TextMeshProUGUI _titleText;
-    [SerializeField] private TextMeshProUGUI _valueText;
+    [SerializeField] private Text _valueText;
+    [SerializeField] private GameObject _valueTextEffectArea;
     [SerializeField] private Button _upgradeButton;
     [SerializeField] private List<Sprite> _buttonSpriteList;
     [SerializeField] private TextMeshProUGUI _upgradeCostText;
@@ -119,6 +120,10 @@ public class HomeWindowUIScript : WindowBase
 
         SetPropertyInfo();
         SetStatusInfo();
+
+        // アニメーション
+        var effectBase = EffectManager.Instance.CreateEffectBase(_valueTextEffectArea.transform,EffectManager.EffectType.Twinkle);
+        effectBase.Play();
     }
 
     private void SetStageInfo() {

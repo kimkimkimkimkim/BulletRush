@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class UIManager : SingletonMonoBehaviour<UIManager>
 {
-    [SerializeField] GameObject _canvas;
+    [SerializeField] GameObject _uiBase;
     [SerializeField] Joystick _joystick;
 
     private GameObject prevWindow;
@@ -51,7 +51,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     public void OpenWindow<T>(GameObject window,Dictionary<string, object> param) where T : WindowBase
     {
         prevWindow = null;
-        foreach(Transform child in _canvas.transform)
+        foreach(Transform child in _uiBase.transform)
         {
             if (child.gameObject.tag == "Screen") {
                 prevWindow = child.gameObject;
@@ -59,7 +59,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
             }
         }
 
-        var instance = (GameObject)Instantiate(window,_canvas.transform);
+        var instance = (GameObject)Instantiate(window,_uiBase.transform);
         nowWindow = instance;
 
         T uiScript = instance.GetComponent<T>();

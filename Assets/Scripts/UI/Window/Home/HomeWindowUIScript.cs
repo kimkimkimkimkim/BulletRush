@@ -15,6 +15,7 @@ public class HomeWindowUIScript : WindowBase
     [SerializeField] private TextMeshProUGUI _coinText;
     [SerializeField] private TextMeshProUGUI _gemText;
     [SerializeField] private GameObject _dragIcon;
+    [SerializeField] private Button _debugButton;
     [SerializeField] private Button _rateButton;
     [SerializeField] private Button _damageButton;
     [SerializeField] private Button _coinButton;
@@ -46,6 +47,10 @@ public class HomeWindowUIScript : WindowBase
                 var y = 50 * Mathf.Sin(2*time);
                 _dragIcon.transform.localPosition = new Vector3(x, y, 0);
             })
+            .Subscribe();
+
+        _debugButton.OnClickIntentAsObservable()
+            .SelectMany(_ => DebugDialogFactory.Create(new DebugDialogRequest()))
             .Subscribe();
 
         _rateButton.OnClickIntentAsObservable()

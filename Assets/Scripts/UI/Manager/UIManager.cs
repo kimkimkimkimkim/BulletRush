@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 public class UIManager : SingletonMonoBehaviour<UIManager>
 {
     [SerializeField] GameObject _uiBase;
+    [SerializeField] GameObject _dialogBase;
     [SerializeField] Joystick _joystick;
 
     private GameObject prevWindow;
@@ -78,6 +79,21 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     public GameObject GetNowWindow()
     {
         return nowWindow;
+    }
+
+    public void OpenDialog<T>(GameObject dialog, Dictionary<string, object> param) where T : DialogBase
+    {
+        var instance = (GameObject)Instantiate(dialog, _uiBase.transform);
+
+        T uiScript = instance.GetComponent<T>();
+        uiScript.Init(param);
+    }
+
+    public IObservable<Unit> CloseDialogObservable(GameObject dialog)
+    {
+        return Observable.ReturnUnit()
+            .Do(_ => Destroy(dialog))
+            .SelectMany(_ => Observable.NextFrame());
     }
 
 }

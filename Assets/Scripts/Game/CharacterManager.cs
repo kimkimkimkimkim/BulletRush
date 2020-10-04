@@ -21,6 +21,7 @@ public class CharacterManager : MonoBehaviour
     private const float MAX_FIRE_INTERVAL = 0.1f;
 
     private bool canFire = true;
+    private bool isMove = false;
     private List<Collider> rangeColliderList = new List<Collider>();
     private Animator animator;
     private float damage;
@@ -93,23 +94,19 @@ public class CharacterManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        animator.SetBool(Condition.isAim.ToString(), false);
+
         if (rangeColliderList.Count != 0)
         { 
             var closestCollider = GetClosestCollider();
             Fire(closestCollider.transform);
-
-            animator.SetBool(Condition.isAim.ToString(), true);
-        }
-        else 
-        {
-            animator.SetBool(Condition.isAim.ToString(), false);
         }
 
 
         if (joystick != null)
         {
             Move();
-            SetDirectionToAnimator();
+            //SetDirectionToAnimator();
         }
     }
 
@@ -128,13 +125,17 @@ public class CharacterManager : MonoBehaviour
         vector = new Vector3(vector.x, 0, vector.y);
         vector = vector.normalized;
 
-        if (vector == Vector3.zero) return;
-        GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position + vector * MOVE_SPEED);
-
-        if (!animator.GetBool(Condition.isAim.ToString()))
+        if (vector == Vector3.zero)
         {
-            transform.rotation = Quaternion.LookRotation(vector);
+            isMove = false;
+            animator.SetFloat(Condition.forward.ToString(), 0);
+            return;
         }
+
+        isMove = true;
+        animator.SetFloat(Condition.forward.ToString(), 1);
+        GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position + vector * MOVE_SPEED);
+        transform.rotation = Quaternion.LookRotation(vector);
     }
 
     private Vector3 GetBulletPosition(int index, int fireRow) {
@@ -151,10 +152,14 @@ public class CharacterManager : MonoBehaviour
     }
 
     private void Fire(Transform target) {
+        // 移動中なら向きも変更しない
+        if (isMove) return;
+
         var vector = GetXZPlaneVector(target.position - transform.position);
         transform.rotation = Quaternion.LookRotation(vector);
 
         if (!canFire) return;
+        animator.SetBool(Condition.isAim.ToString(), true);
         canFire = false;
         Observable.Timer(TimeSpan.FromSeconds(fireInterval))
             .Do(_ => canFire = true)

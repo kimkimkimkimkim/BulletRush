@@ -10,10 +10,12 @@ public class GameWindowUIScript : WindowBase
 {
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private Slider _scoreSlider;
+    [SerializeField] private Text _simulationResultText;
 
     public override void Init(Dictionary<string, object> param)
     {
-        base.Init(param);
+        var simulationResultText = (string)param["simulationResultText"];
+        _simulationResultText.text = simulationResultText;
 
         SetInitialScore();
     }

@@ -41,7 +41,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         score = 0;
         CreateEnemy(enemySpawnDataList);
 
-        GameWindowFactory.Create(new GameWindowRequest())
+        var simulationResultText = Simulation.GetSimulationResult(enemySpawnDataList);
+        GameWindowFactory.Create(new GameWindowRequest() { simulationResultText = simulationResultText })
             .Subscribe();
     }
 

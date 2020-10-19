@@ -96,6 +96,15 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
             .SelectMany(_ => Observable.NextFrame());
     }
 
+    public void PlaySpeedUpAnimationObservable()
+    {
+        if (nowWindow == null) return;
+        var uiScript = nowWindow.GetComponent<GameWindowUIScript>();
+        if (uiScript == null) return ;
+
+        uiScript.PlaySpeedUpAnimationObservable();
+    }
+
 }
 
 public enum UIMode {

@@ -14,6 +14,13 @@ public class EnemyManager : MonoBehaviour
 
     private float health;
 
+    public void Init(float health, Vector3 direction)
+    {
+        SetNum(health);
+        Move(direction);
+        SetType();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(
@@ -26,7 +33,7 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    public void SetNum(float health) {
+    private void SetNum(float health) {
         this.health = health;
         _numText.text = Math.Ceiling(health).ToString();
     }
@@ -52,7 +59,7 @@ public class EnemyManager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void Move(Vector3 direction)
+    private void Move(Vector3 direction)
     {
         enemyData.direction = direction.normalized;
         GetComponent<Rigidbody>().velocity = direction.normalized * SPEED;
@@ -81,4 +88,26 @@ public class EnemyManager : MonoBehaviour
                 return Vector3.zero;
         }
     }
+
+    private void SetType()
+    {
+        switch (enemyData.enemyType)
+        {
+            case EnemyType.Normal:
+                break;
+            case EnemyType.Guard:
+                CreateShield();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void CreateShield() {
+        var shield = (GameObject)Resources.Load("Assets/Enemy/Shield");
+        var instance = (GameObject)Instantiate(shield, transform);
+        var shieldProperty = instance.GetComponent<ShieldProperty>();
+        shieldProperty.Init(this);
+    }
+
 }

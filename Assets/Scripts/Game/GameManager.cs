@@ -100,8 +100,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
         var enemyManager = enemy.GetComponent<EnemyManager>();
         enemyManager.enemyData = enemyData;
-        enemyManager.SetNum(enemyData.health);
-        enemyManager.Move(enemyData.direction);
+        enemyManager.Init(enemyData.health, enemyData.direction);
     }
 
     private void Dispose()

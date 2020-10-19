@@ -23,6 +23,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private List<IDisposable> observableList = new List<IDisposable>();
     private IDisposable phase2Observable;
     private IDisposable phase3Observable;
+    private int killNum;
+    private int stageClearKillNum;
 
     private void Start()
     {
@@ -41,8 +43,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         var enemySpawnDataList = MasterRecords.GetEnemySpawnDataList(stageId);
 
         _characterManager.SetStatus();
-        stageClearScore = GetStageClearScore(enemySpawnDataList);
         score = 0;
+        stageClearScore = GetStageClearScore(enemySpawnDataList);
+        killNum = 0;
+        stageClearKillNum = GetStageClearKillNum(enemySpawnDataList);
         InitializePhase();
         enemyManagerList.Clear();
         CreateEnemy(enemySpawnDataList);
@@ -98,6 +102,26 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             default:
                 return 0;
         }
+    }
+
+    private int GetStageClearKillNum(List<EnemyData> enemyDataList)
+    {
+        return enemyDataList
+            .Select(e =>
+            {
+                switch (e.enemySize)
+                {
+                    case EnemySize.Small:
+                        return 1;
+                    case EnemySize.Medium:
+                        return 3;
+                    case EnemySize.Large:
+                        return 7;
+                    default:
+                        return 0;
+                }
+            })
+            .Sum();
     }
 
     private void CreateEnemy(List<EnemyData> enemyDataList)
@@ -171,7 +195,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
         score += damage;
         if (gameWindowUIScript != null) gameWindowUIScript.SetScore(score);
-        if (score >= stageClearScore) Clear();
     }
 
     private void SetGameWindowUIScript()
@@ -192,6 +215,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         {
             Split(enemyData);
         }
+
+        killNum++;
+        if (killNum >= stageClearKillNum) Clear();
     }
 
     private void Split(EnemyData enemyData)

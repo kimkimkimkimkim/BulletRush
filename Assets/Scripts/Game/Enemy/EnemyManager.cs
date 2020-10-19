@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using static GameManager;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -10,24 +11,24 @@ public class EnemyManager : MonoBehaviour
 
     [HideInInspector] public EnemyData enemyData;
 
-    private const float SPEED = 2;
-
+    private float speed = 2;
     private float health;
 
-    public void Init(float health, Vector3 direction)
+    public void Init(float health, Vector3 direction, Phase phase)
     {
         SetNum(health);
+        SetSpeed(phase);
         Move(direction);
         SetType();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(
+        if (
             other.gameObject.tag == "WallTop" ||
             other.gameObject.tag == "WallRight" ||
             other.gameObject.tag == "WallLeft" ||
-            other.gameObject.tag == "WallBottom" )
+            other.gameObject.tag == "WallBottom")
         {
             Reflection(other);
         }
@@ -38,6 +39,20 @@ public class EnemyManager : MonoBehaviour
         _numText.text = Math.Ceiling(health).ToString();
     }
 
+    public void SetSpeed(Phase phase) {
+        switch (phase) {
+            case Phase.Phase1:
+                speed = 2;
+                break;
+            case Phase.Phase2:
+                speed = 3;
+                break;
+            case Phase.Phase3:
+                speed = 4;
+                break;
+        }
+    }
+
     public void TakeDamage(float damage) {
         if (health - damage <= 0)
         {
@@ -46,7 +61,6 @@ public class EnemyManager : MonoBehaviour
         }
         else
         {
-            
             GameManager.Instance.AddScore(damage);
             SetNum(health - damage);
         }
@@ -55,14 +69,14 @@ public class EnemyManager : MonoBehaviour
 
     private void Killed() {
         enemyData.position = transform.position;
-        GameManager.Instance.KillTheEnemy(enemyData);
+        GameManager.Instance.KillTheEnemy(this);
         Destroy(gameObject);
     }
 
-    private void Move(Vector3 direction)
+    public void Move(Vector3 direction)
     {
         enemyData.direction = direction.normalized;
-        GetComponent<Rigidbody>().velocity = direction.normalized * SPEED;
+        GetComponent<Rigidbody>().velocity = direction.normalized * speed;
 
     }
 
@@ -109,5 +123,4 @@ public class EnemyManager : MonoBehaviour
         var shieldProperty = instance.GetComponent<ShieldProperty>();
         shieldProperty.Init(this);
     }
-
 }

@@ -16,9 +16,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     [HideInInspector] public float score;
     [HideInInspector] public float stageClearScore;
+    [HideInInspector] public Phase phase;
 
     private GameWindowUIScript gameWindowUIScript;
+    private List<EnemyManager> enemyManagerList = new List<EnemyManager>();
     private List<IDisposable> observableList = new List<IDisposable>();
+    private IDisposable phase2Observable;
+    private IDisposable phase3Observable;
 
     private void Start()
     {
@@ -39,11 +43,37 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         _characterManager.SetStatus();
         stageClearScore = GetStageClearScore(enemySpawnDataList);
         score = 0;
+        InitializePhase();
+        enemyManagerList.Clear();
         CreateEnemy(enemySpawnDataList);
 
         var simulationResultText = Simulation.GetSimulationResult(enemySpawnDataList);
         GameWindowFactory.Create(new GameWindowRequest() { simulationResultText = simulationResultText })
             .Subscribe();
+    }
+
+    private void InitializePhase()
+    {
+        phase = Phase.Phase1;
+        phase2Observable = Observable.Timer(TimeSpan.FromSeconds(15))
+            .Do(_ => {
+                phase = Phase.Phase2;
+                enemyManagerList.ForEach(e => SetSpeedAndMove(e));
+            })
+            .Subscribe();
+        phase3Observable = Observable.Timer(TimeSpan.FromSeconds(45))
+            .Do(_ => {
+                phase = Phase.Phase3;
+                enemyManagerList.ForEach(e => SetSpeedAndMove(e));
+            })
+            .Subscribe();
+    }
+
+    private void SetSpeedAndMove(EnemyManager enemyManager)
+    {
+        var rigidbody = enemyManager.GetComponent<Rigidbody>();
+        enemyManager.SetSpeed(phase);
+        enemyManager.Move(rigidbody.velocity);
     }
 
     private int GetStageClearScore(List<EnemyData> enemyDataList)
@@ -58,7 +88,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private int GetTotalNum(int num,EnemySize size)
     {
-
         switch (size)
         {
             case EnemySize.Small:
@@ -99,8 +128,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         enemy.transform.position = new Vector3(enemyData.position.x, y, enemyData.position.z);
 
         var enemyManager = enemy.GetComponent<EnemyManager>();
+        enemyManagerList.Add(enemyManager);
         enemyManager.enemyData = enemyData;
-        enemyManager.Init(enemyData.health, enemyData.direction);
+        enemyManager.Init(enemyData.health, enemyData.direction, phase);
     }
 
     private void Dispose()
@@ -110,6 +140,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             observable.Dispose();
         });
         observableList.Clear();
+
+        if (phase2Observable != null) phase2Observable.Dispose();
+        if (phase3Observable != null) phase3Observable.Dispose();
     }
 
     public void Defeat() {
@@ -150,8 +183,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         }
     }
 
-    public void KillTheEnemy(EnemyData enemyData)
+    public void KillTheEnemy(EnemyManager enemyManager)
     {
+        enemyManagerList.Remove(enemyManager);
+
+        var enemyData = enemyManager.enemyData;
         if(enemyData.enemySize != EnemySize.Small)
         {
             Split(enemyData);
@@ -187,13 +223,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 return EnemySize.Medium;
             default:
                 return EnemySize.None;
-                
         }
     }
 
     private void Clear() {
         Time.timeScale = 0;
         UIManager.Instance.SetUI(UIMode.Win);
+        Dispose();
 
         var stageId = SaveDataUtil.Status.GetNextStageId();
         var stage = MasterRecords.GetStageMB().FirstOrDefault(m => m.Id == stageId);
@@ -210,4 +246,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             .Subscribe();
     }
 
+    public enum Phase
+    {
+        Phase1,
+        Phase2,
+        Phase3,
+    }
 }

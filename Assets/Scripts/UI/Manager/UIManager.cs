@@ -83,7 +83,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
 
     public void OpenDialog<T>(GameObject dialog, Dictionary<string, object> param) where T : DialogBase
     {
-        var instance = (GameObject)Instantiate(dialog, _uiBase.transform);
+        var instance = (GameObject)Instantiate(dialog, _dialogBase.transform);
 
         T uiScript = instance.GetComponent<T>();
         uiScript.Init(param);

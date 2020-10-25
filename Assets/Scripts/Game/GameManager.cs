@@ -185,6 +185,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 else
                 {
                     MobileAdsManager.Instance.TryShowInterstitial();
+                    MobileAdsManager.Instance.DestroyBanner();
                     Dispose();
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }

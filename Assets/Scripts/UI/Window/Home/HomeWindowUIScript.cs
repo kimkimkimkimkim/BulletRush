@@ -88,41 +88,40 @@ public class HomeWindowUIScript : WindowBase
     {
         int possessedCoin = SaveDataUtil.Property.GetCoin();
         int level;
+        int nextLevelCost;
 
         switch (currentTabType)
         {
             case TabType.Rate:
                 level = SaveDataUtil.Status.GetRateLevel();
-                var rate = MasterRecords.GetRateMB().First(m => m.Level == level);
-                if (possessedCoin < rate.NextLevelCost) return;
-                SaveDataUtil.Property.SetCoin(possessedCoin - rate.NextLevelCost);
+                nextLevelCost = MasterRecords.GetLevelUpCoin(level + 1);
+                if (possessedCoin < nextLevelCost) return;
                 SaveDataUtil.Status.SetRateLevel(level + 1);
                 break;
             case TabType.Damage:
                 level = SaveDataUtil.Status.GetDamageLevel();
-                var damage = MasterRecords.GetDamageMB().First(m => m.Level == level);
-                if (possessedCoin < damage.NextLevelCost) return;
-                SaveDataUtil.Property.SetCoin(possessedCoin - damage.NextLevelCost);
+                nextLevelCost = MasterRecords.GetLevelUpCoin(level + 1);
+                if (possessedCoin < nextLevelCost) return;
                 SaveDataUtil.Status.SetDamageLevel(level + 1);
                 break;
             case TabType.Coin:
                 level = SaveDataUtil.Status.GetCoinLevel();
-                var coin = MasterRecords.GetCoinMB().First(m => m.Level == level);
-                if (possessedCoin < coin.NextLevelCost) return;
-                SaveDataUtil.Property.SetCoin(possessedCoin - coin.NextLevelCost);
+                nextLevelCost = MasterRecords.GetLevelUpCoin(level + 1);
+                if (possessedCoin < nextLevelCost) return;
                 SaveDataUtil.Status.SetCoinLevel(level + 1);
                 break;
             case TabType.OfflineReward:
                 level = SaveDataUtil.Status.GetOfflineRewardLevel();
-                var offlineReward = MasterRecords.GetOfflineRewardMB().First(m => m.Level == level);
-                if (possessedCoin < offlineReward.NextLevelCost) return;
-                SaveDataUtil.Property.SetCoin(possessedCoin - offlineReward.NextLevelCost);
+                nextLevelCost = MasterRecords.GetLevelUpCoin(level + 1);
+                if (possessedCoin < nextLevelCost) return;
                 SaveDataUtil.Status.SetOfflineRewardLevel(level + 1);
                 break;
             default:
+                nextLevelCost = 0;
                 break;
         }
 
+        SaveDataUtil.Property.SetCoin(possessedCoin - nextLevelCost);
         SetPropertyInfo();
         SetStatusInfo();
 
@@ -163,47 +162,46 @@ public class HomeWindowUIScript : WindowBase
         {
             case TabType.Rate:
                 level = SaveDataUtil.Status.GetRateLevel();
-                var rate = MasterRecords.GetRateMB().First(m => m.Level == level);
+                var rate = MasterRecords.GetRateStatus(level);
                 titleText = "RATE";
-                valueText = rate.Value + "/s";
-                upgradeCost = rate.NextLevelCost;
+                valueText = rate + "/s";
                 break;
             case TabType.Damage:
                 level = SaveDataUtil.Status.GetDamageLevel();
-                var damage = MasterRecords.GetDamageMB().First(m => m.Level == level);
+                var damage = MasterRecords.GetDamageStatus(level);
                 titleText = "DAMAGE";
-                valueText = damage.Value.ToString();
-                upgradeCost = damage.NextLevelCost;
+                valueText = damage.ToString();
                 break;
             case TabType.Coin:
                 level = SaveDataUtil.Status.GetCoinLevel();
-                var coin = MasterRecords.GetCoinMB().First(m => m.Level == level);
+                var coin = MasterRecords.GetCoinBonusStatus(level) * 100;
                 titleText = "COIN";
-                valueText = "x " + coin.Value;
-                upgradeCost = coin.NextLevelCost;
+                valueText = coin + "%";
                 break;
             case TabType.OfflineReward:
                 level = SaveDataUtil.Status.GetOfflineRewardLevel();
-                var offlineReward = MasterRecords.GetOfflineRewardMB().First(m => m.Level == level);
+                var offlineReward = MasterRecords.GetOfflineBonusStatus(level) * 100;
                 titleText = "OFFLINE";
-                valueText = offlineReward.Value + "/m";
-                upgradeCost = offlineReward.NextLevelCost;
+                valueText = offlineReward + "%";
                 break;
             default:
                 titleText = "";
                 valueText = "";
-                upgradeCost = 0;
+                level = 1000;
                 break;
         }
-
-        _titleText.text = titleText;
-        _valueText.text = valueText;
-        _upgradeCostText.text = StatusUtil.GetCostText(upgradeCost);
-        _upgradeButton.GetComponent<Image>().sprite = _buttonSpriteList[(int)currentTabType - 1];
+        upgradeCost = MasterRecords.GetLevelUpCoin(level + 1);
 
         // お金足りるかチェック
         var isEnough = upgradeCost <= SaveDataUtil.Property.GetCoin();
-        _upgradeButtonGrayOutPanel.SetActive(!isEnough);
+        // 最大レベルチェック
+        var isMaxLevel = level == ConstUtil.MAX_STATUS_LEVEL;
+
+        _titleText.text = titleText;
+        _valueText.text = valueText;
+        _upgradeCostText.text = isMaxLevel ? "MAX" : StatusUtil.GetCostText(upgradeCost);
+        _upgradeButton.GetComponent<Image>().sprite = _buttonSpriteList[(int)currentTabType - 1];
+        _upgradeButtonGrayOutPanel.SetActive(!isEnough || isMaxLevel);
     }
 
     private enum TabType

@@ -176,14 +176,19 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         UIManager.Instance.SetUI(UIMode.Defeat);
 
         DefeatWindowFactory.Create(new DefeatWindowRequest())
-            .Do(_ => Time.timeScale = 1)
             .Do(res =>
             {
                 if (res.isContinue) {
-                    UIManager.Instance.SetUI(UIMode.Playing);
+                    MobileAdsManager.Instance.TryShowRewarded(() =>
+                    {
+                        Time.timeScale = 1;
+                        UIManager.Instance.SetUI(UIMode.Playing);
+                    });
+
                 }
                 else
                 {
+                    Time.timeScale = 1;
                     MobileAdsManager.Instance.TryShowInterstitial();
                     MobileAdsManager.Instance.DestroyBanner();
                     Dispose();
@@ -262,14 +267,19 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         Dispose();
 
         var stageId = SaveDataUtil.Status.GetNextStageId();
-        var stage = MasterRecords.GetStageMB().FirstOrDefault(m => m.Id == stageId);
+        var rewardCoinStatusLevel = SaveDataUtil.Status.GetCoinLevel();
+        var rewardCoinStatus = MasterRecords.GetCoinBonusStatus(rewardCoinStatusLevel);
+        var rewardCoin = MasterRecords.GetStageClearRewardCoin(stageId);
         SaveDataUtil.Status.SetClearedStageId(stageId);
 
         Observable.ReturnUnit()
             .Delay(TimeSpan.FromSeconds(0.05f), Scheduler.MainThreadIgnoreTimeScale)
             .SelectMany(_ => ClearWindowFactory.Create(new ClearWindowRequest()
             {
-                clearResultData = new ClearResultData() { rewardCoin = stage.RewardCoin,rewardGem = stage.RewardGem}
+                clearResultData = new ClearResultData() { 
+                    rewardCoin = (int)(rewardCoin * rewardCoinStatus),
+                    rewardGem = 1
+                },
             }))
             .Do(_ => Time.timeScale = 1)
             .Do(_ => SceneManager.LoadScene(SceneManager.GetActiveScene().name))

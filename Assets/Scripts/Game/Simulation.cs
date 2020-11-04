@@ -40,10 +40,10 @@ public class Simulation
         var damageLevel = SaveDataUtil.Status.GetDamageLevel();
         var rateLevel = SaveDataUtil.Status.GetRateLevel();
 
-        var damage = MasterRecords.GetDamageMB().First(m => m.Level == damageLevel).Value;
-        var rate = MasterRecords.GetRateMB().First(m => m.Level == rateLevel).Value;
+        var damage = MasterRecords.GetDamageStatus(damageLevel);
+        var rate = MasterRecords.GetRateStatus(rateLevel);
 
-        dps = damage * rate;
+        dps = damage / rate;
     }
 
     private static void AddDifficulty()

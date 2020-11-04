@@ -8,6 +8,9 @@ public class MobileAdsManager : SingletonMonoBehaviour<MobileAdsManager>
 {
     private BannerView bannerView;
     private InterstitialAd interstitial;
+    private RewardedAd rewardedAd;
+
+    private Action rewardedCallBackAction; // 報酬受け取り時に実行する処理
 
     void Start()
     {
@@ -25,6 +28,7 @@ public class MobileAdsManager : SingletonMonoBehaviour<MobileAdsManager>
         // 広告取得
         RequestBanner();
         RequestInterstitial();
+        RequestRewarded();
     }
 
     #region Banner
@@ -167,5 +171,97 @@ public class MobileAdsManager : SingletonMonoBehaviour<MobileAdsManager>
     {
         interstitial.Destroy();
     }
+    #endregion
+
+    #region Rewarded
+    public bool TryShowRewarded(Action action)
+    {
+        if (this.rewardedAd.IsLoaded())
+        {
+            rewardedCallBackAction = action;
+            this.rewardedAd.Show();
+            return true;
+        }
+        else
+        { 
+            return false;
+        }
+    }
+
+    private void RequestRewarded()
+    {
+        #if UNITY_ANDROID
+            string adUnitId = "ca-app-pub-3940256099942544/5224354917";
+        #elif UNITY_IPHONE
+            string adUnitId = "ca-app-pub-3940256099942544/1712485313";
+        #else
+            string adUnitId = "unexpected_platform";
+        #endif
+
+        this.rewardedAd = new RewardedAd(adUnitId);
+
+        // Called when an ad request has successfully loaded.
+        this.rewardedAd.OnAdLoaded += HandleRewardedAdLoaded;
+        // Called when an ad request failed to load.
+        this.rewardedAd.OnAdFailedToLoad += HandleRewardedAdFailedToLoad;
+        // Called when an ad is shown.
+        this.rewardedAd.OnAdOpening += HandleRewardedAdOpening;
+        // Called when an ad request failed to show.
+        this.rewardedAd.OnAdFailedToShow += HandleRewardedAdFailedToShow;
+        // Called when the user should be rewarded for interacting with the ad.
+        this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
+        // Called when the ad is closed.
+        this.rewardedAd.OnAdClosed += HandleRewardedAdClosed;
+
+        // Create an empty ad request.
+        AdRequest request = new AdRequest.Builder().Build();
+
+        // Load the rewarded ad with the request.
+        this.rewardedAd.LoadAd(request);
+    }
+
+    public void HandleRewardedAdLoaded(object sender, EventArgs args)
+    {
+        MonoBehaviour.print("HandleRewardedAdLoaded event received");
+    }
+
+    public void HandleRewardedAdFailedToLoad(object sender, AdErrorEventArgs args)
+    {
+        MonoBehaviour.print(
+            "HandleRewardedAdFailedToLoad event received with message: "
+                             + args.Message);
+    }
+
+    public void HandleRewardedAdOpening(object sender, EventArgs args)
+    {
+        MonoBehaviour.print("HandleRewardedAdOpening event received");
+    }
+
+    public void HandleRewardedAdFailedToShow(object sender, AdErrorEventArgs args)
+    {
+        MonoBehaviour.print(
+            "HandleRewardedAdFailedToShow event received with message: "
+                             + args.Message);
+    }
+
+    public void HandleRewardedAdClosed(object sender, EventArgs args)
+    {
+        // 次の広告を読み込んでおく
+        RequestRewarded();
+        MonoBehaviour.print("HandleRewardedAdClosed event received");
+    }
+
+    public void HandleUserEarnedReward(object sender, Reward args)
+    {
+        string type = args.Type;
+        double amount = args.Amount;
+        MonoBehaviour.print(
+            "HandleRewardedAdRewarded event received for "
+                        + amount.ToString() + " " + type);
+
+        //報酬受け取り時の処理
+        if(rewardedCallBackAction != null) rewardedCallBackAction();
+    }
+
     #endregion
 }

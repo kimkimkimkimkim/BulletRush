@@ -19,7 +19,7 @@
         public static int GetNextStageId()
         {
             var clearedStageId = GetClearedStageId();
-            var totalStageNum = MasterRecords.GetStageMB().Count;
+            var totalStageNum = ConstUtil.CURRENT_MAX_STAGE_COUNT;
 
             if(clearedStageId >= totalStageNum) {
                 // クリアしているステージと全部のステージの個数が等しい場合

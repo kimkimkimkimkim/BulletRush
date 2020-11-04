@@ -75,8 +75,8 @@ public class CharacterManager : MonoBehaviour
         var damageLevel = SaveDataUtil.Status.GetDamageLevel();
         var rateLevel = SaveDataUtil.Status.GetRateLevel();
 
-        damage = MasterRecords.GetDamageMB().First(m => m.Level == damageLevel).Value;
-        var rate = MasterRecords.GetRateMB().First(m => m.Level == rateLevel).Value;
+        damage = MasterRecords.GetDamageStatus(damageLevel);
+        var rate = MasterRecords.GetRateStatus(rateLevel);
         var interval = 1 / rate;
         var ratio = MAX_FIRE_INTERVAL / interval;
 

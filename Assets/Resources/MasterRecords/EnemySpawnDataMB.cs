@@ -14,6 +14,17 @@ namespace BulletRush.MasterRecord
     [Serializable]
     public class EnemySpawnData
     {
-        public List<EnemyData> enemyList;
+        public List<SimpleEnemyData> enemyList;
+    }
+
+    [Serializable]
+    public class SimpleEnemyData
+    {
+        public float time;
+        public float health;
+        public int position; // 1 ~ 9
+        public int direction; // 1 ~ 4
+        public EnemySize enemySize;
+        public EnemyType enemyType;
     }
 }

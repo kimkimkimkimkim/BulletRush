@@ -11,9 +11,24 @@ public static class MasterRecords
 
         var enemySpawnDataList = Resources.Load<EnemySpawnDataMB>("MasterRecords/EnemySpawnDataMB").stageList;
         var enemySpawnData = enemySpawnDataList[stageId - 1];
+        var simpleEnemyDataList = enemySpawnData.enemyList;
+
+        // simpleからの変換
+        var enemyDataList = simpleEnemyDataList.Select(s =>
+        {
+            return new EnemyData()
+            {
+                time = s.time,
+                health = s.health,
+                position = EnemyUtil.GetPosition(s.position),
+                direction = EnemyUtil.GetDirection(s.direction),
+                enemySize = s.enemySize,
+                enemyType = s.enemyType,
+            };
+        }).ToList();
 
         // 角度乱数発生
-        var enemyDataList = enemySpawnData.enemyList.Select(e =>
+        enemyDataList = enemyDataList.Select(e =>
         {
             var randomAngle = UnityEngine.Random.Range(-10.0f, 10.0f);
             return new EnemyData()
@@ -69,5 +84,4 @@ public static class MasterRecords
     {
         return GetDamageStatus(stageId) / GetRateStatus(stageId);
     }
-
 }

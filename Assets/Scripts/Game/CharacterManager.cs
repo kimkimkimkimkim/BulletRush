@@ -72,8 +72,11 @@ public class CharacterManager : MonoBehaviour
 
     public void SetStatus()
     {
-        var damageLevel = SaveDataUtil.Status.GetDamageLevel();
-        var rateLevel = SaveDataUtil.Status.GetRateLevel();
+        var isTestMode = GameManager.Instance._isTestMode;
+        var nextStageId = SaveDataUtil.Status.GetNextStageId();
+
+        var damageLevel = isTestMode ? nextStageId : SaveDataUtil.Status.GetDamageLevel();
+        var rateLevel = isTestMode ? nextStageId : SaveDataUtil.Status.GetRateLevel();
 
         damage = MasterRecords.GetDamageStatus(damageLevel);
         var rate = MasterRecords.GetRateStatus(rateLevel);

@@ -1017,6 +1017,7 @@ MonoBehaviour:
   - {fileID: 3091262757747494842, guid: baa3aab04b7884f84996ff62e5345bc3, type: 3}
   _spawnCircle: {fileID: 362640608692317128, guid: e8ca17cecaa324b1eaa7b0294766d792,
     type: 3}
+  _isTestMode: 1
   score: 0
   stageClearScore: 0
   phase: 0

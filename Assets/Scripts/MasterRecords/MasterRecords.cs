@@ -13,10 +13,21 @@ public static class MasterRecords
         var enemySpawnData = enemySpawnDataList[stageId - 1];
 
         // 角度乱数発生
-        var randomAngle = UnityEngine.Random.Range(-5.0f, 5.0f);
-        enemySpawnData.enemyList.ForEach(e => e.direction = Quaternion.Euler(0,randomAngle,0) * e.direction);
+        var enemyDataList = enemySpawnData.enemyList.Select(e =>
+        {
+            var randomAngle = UnityEngine.Random.Range(-10.0f, 10.0f);
+            return new EnemyData()
+            {
+                time = e.time,
+                health = e.health,
+                position = e.position,
+                direction = Quaternion.Euler(0, randomAngle, 0) * e.direction,
+                enemySize = e.enemySize,
+                enemyType = e.enemyType,
+            };
+        }).ToList();
 
-        return enemySpawnData.enemyList;
+        return enemyDataList;
     }
 
     // nextLevelレベルにレベルアップするために必要なコイン量を取得

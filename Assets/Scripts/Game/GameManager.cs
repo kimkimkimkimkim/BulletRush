@@ -13,6 +13,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField] private Joystick _joystick;
     [SerializeField] private List<GameObject> _enemyPrefabList;
     [SerializeField] private GameObject _spawnCircle;
+    [SerializeField] public bool _isTestMode;
 
     [HideInInspector] public float score;
     [HideInInspector] public float stageClearScore;

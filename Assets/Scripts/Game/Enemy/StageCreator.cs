@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using BulletRush.MasterRecord;
 using UnityEngine;
 
 public static class StageCreator
@@ -13,7 +14,28 @@ public static class StageCreator
     public static List<EnemyData> GetEnemySpawnDataList(int stageId)
     {
         var intervalAndDifficultyDataList = GetIntervalAndDifficultyDataList(stageId);
-        var enemyDataList = intervalAndDifficultyDataList.Select(d => GetEnemyData(d)).ToList();
+        var simpleEnemyDataList = new List<SimpleEnemyData>();
+        var time = 0f;
+        for(var i = 0; i< intervalAndDifficultyDataList.Count; i++)
+        {
+            var intervalAndDifficultyData = intervalAndDifficultyDataList[i];
+            simpleEnemyDataList = simpleEnemyDataList.Concat(GetSimpleEnemyDataList(intervalAndDifficultyData,time)).ToList();
+            time += intervalAndDifficultyData.interval;
+        }
+
+        // simpleからの変換
+        var enemyDataList = simpleEnemyDataList.Select(s =>
+        {
+            return new EnemyData()
+            {
+                time = s.time,
+                health = s.health,
+                position = EnemyUtil.GetPosition(s.position),
+                direction = EnemyUtil.GetDirection(s.direction),
+                enemySize = s.enemySize,
+                enemyType = s.enemyType,
+            };
+        }).ToList();
 
         // 角度乱数発生
         enemyDataList = enemyDataList.Select(e =>
@@ -33,7 +55,7 @@ public static class StageCreator
         return enemyDataList;
     }
 
-    private static EnemyData GetEnemyData(IntervalAndDifficultyData data)
+    private static List<SimpleEnemyData> GetSimpleEnemyDataList(IntervalAndDifficultyData data,float time)
     {
         var random = UnityEngine.Random.Range(1, 101);
 
@@ -45,40 +67,40 @@ public static class StageCreator
             case Difficulty.Easy:
                 if(random <= 50)
                 {
-                    health = (int)Math.Floor(data.interval);
+                    health = (int)Math.Ceiling(data.interval);
                     size = EnemySize.Small;
                     num = 1;
                 }
                 else if(random <= 70)
                 {
-                    health = (int)Math.Floor(data.interval/2);
+                    health = (int)Math.Ceiling(data.interval/2);
                     size = EnemySize.Small;
                     num = 2;
                 }
                 else if(random <= 90)
                 {
-                    health = (int)Math.Floor(data.interval / 2);
+                    health = (int)Math.Ceiling(data.interval / 2);
                     size = EnemySize.Medium;
                     num = 1;
                 }
                 else
                 {
-                    health = (int)Math.Floor(data.interval / 4);
+                    health = (int)Math.Ceiling(data.interval / 4);
                     size = EnemySize.Small;
                     num = 1;
                 }
-                health = (int)Math.Floor((float)(health * 2 / 3));
+                health = (int)Math.Ceiling((float)(health * 2 / 3));
                 break;
             case Difficulty.Medium:
                 if (random <= 15)
                 {
-                    health = (int)Math.Floor(data.interval);
+                    health = (int)Math.Ceiling(data.interval);
                     size = EnemySize.Small;
                     num = 1;
                 }
                 else if (random <= 25)
                 {
-                    health = (int)Math.Floor(data.interval / 2);
+                    health = (int)Math.Ceiling(data.interval / 2);
                     size = EnemySize.Small;
                     num = 2;
                 }
@@ -90,19 +112,19 @@ public static class StageCreator
                 }
                 else if (random <= 90)
                 {
-                    health = (int)Math.Floor(data.interval / 4);
+                    health = (int)Math.Ceiling(data.interval / 4);
                     size = EnemySize.Medium;
                     num = 2;
                 }
                 else if (random <= 95)
                 {
-                    health = (int)Math.Floor(data.interval / 4);
+                    health = (int)Math.Ceiling(data.interval / 4);
                     size = EnemySize.Large;
                     num = 1;
                 }
                 else
                 {
-                    health = (int)Math.Floor(data.interval / 8);
+                    health = (int)Math.Ceiling(data.interval / 8);
                     size = EnemySize.Large;
                     num = 2;
                 }
@@ -110,58 +132,71 @@ public static class StageCreator
             case Difficulty.Difficult:
                 if (random <= 5)
                 {
-                    health = (int)Math.Floor(data.interval / 2);
+                    health = (int)Math.Ceiling(data.interval / 2);
                     size = EnemySize.Small;
                     num = 2;
                 }
                 else if (random <= 25)
                 {
-                    health = (int)Math.Floor(data.interval / 4);
+                    health = (int)Math.Ceiling(data.interval / 4);
                     size = EnemySize.Small;
                     num = 4;
                 }
                 else if (random <= 45)
                 {
-                    health = (int)Math.Floor(data.interval / 2);
+                    health = (int)Math.Ceiling(data.interval / 2);
                     size = EnemySize.Medium;
                     num = 1;
                 }
                 else if (random <= 60)
                 {
-                    health = (int)Math.Floor(data.interval / 4);
+                    health = (int)Math.Ceiling(data.interval / 4);
                     size = EnemySize.Medium;
                     num = 2;
                 }
                 else if (random <= 65)
                 {
-                    health = (int)Math.Floor(data.interval / 8);
+                    health = (int)Math.Ceiling(data.interval / 8);
                     size = EnemySize.Medium;
                     num = 4;
                 }
                 else if (random <= 85)
                 {
-                    health = (int)Math.Floor(data.interval / 4);
+                    health = (int)Math.Ceiling(data.interval / 4);
                     size = EnemySize.Large;
                     num = 1;
                 }
                 else if (random <= 95)
                 {
-                    health = (int)Math.Floor(data.interval / 8);
+                    health = (int)Math.Ceiling(data.interval / 8);
                     size = EnemySize.Large;
                     num = 2;
                 }
                 else
                 {
-                    health = (int)Math.Floor(data.interval / 16);
+                    health = (int)Math.Ceiling(data.interval / 16);
                     size = EnemySize.Large;
                     num = 4;
                 }
-                health = (int)Math.Floor((float)(health * 3 / 2));
+                health = (int)Math.Ceiling((float)(health * 3 / 2));
                 break;
         }
 
+        var positionList = GetPositionList(num);
+        var simpleEnemyDataList = positionList.Select(position =>
+        {
+            return new SimpleEnemyData()
+            {
+                time = time,
+                health = health,
+                position = position,
+                direction = GetDirection(),
+                enemySize = size,
+                enemyType = EnemyType.Normal,
+            };
+        }).ToList();
 
-        return new EnemyData();
+        return simpleEnemyDataList;
     }
 
     private static List<IntervalAndDifficultyData> GetIntervalAndDifficultyDataList(int stageId)
@@ -223,6 +258,66 @@ public static class StageCreator
                 break;
         }
         return intervalAndDifficultyMasterList.GetRandom().GetShuffledDataList();
+    }
+
+    private static List<int> GetPositionList(int num)
+    {
+        var positionList = new List<int>();
+
+        for (var i = 0; i < 12; i++)
+        {
+            positionList.Add(1);
+        }
+
+        for (var i = 0; i < 12; i++)
+        {
+            positionList.Add(2);
+        }
+
+        for (var i = 0; i < 12; i++)
+        {
+            positionList.Add(3);
+        }
+
+        for (var i = 0; i < 12; i++)
+        {
+            positionList.Add(4);
+        }
+
+        for (var i = 0; i < 4; i++)
+        {
+            positionList.Add(5);
+        }
+
+        for (var i = 0; i < 12; i++)
+        {
+            positionList.Add(6);
+        }
+
+        for (var i = 0; i < 12; i++)
+        {
+            positionList.Add(7);
+        }
+
+        for (var i = 0; i < 12; i++)
+        {
+            positionList.Add(8);
+        }
+
+        for (var i = 0; i < 12; i++)
+        {
+            positionList.Add(9);
+        }
+
+        positionList = positionList.GetShuffledList();
+
+        return positionList.GetRange(0, num);
+    }
+
+    private static int GetDirection()
+    {
+        var directionList = new List<int>() { 1, 2, 3, 4 };
+        return directionList.GetRandom();
     }
 }
 

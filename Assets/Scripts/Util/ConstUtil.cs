@@ -10,7 +10,4 @@ public static class ConstUtil
 
     // 最大ステージ数
     public static int MAX_STAGE_COUNT = 1000;
-
-    // 現在実装中の最大ステージ数
-    public static int CURRENT_MAX_STAGE_COUNT = Resources.Load<EnemySpawnDataMB>("MasterRecords/EnemySpawnDataMB").stageList.Count;
 }

@@ -1,17 +1,66 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using BulletRush.MasterRecord;
 using UnityEngine;
 
 public static class StageCreator
 {
+    private static readonly string path = Application.dataPath + "/Data/";
+    private static readonly string fileName = "StageData.json";
+
+    public static void CreateStage()
+    {
+        var tempJson = new List<string>();
+        for(var i = 0; i < ConstUtil.MAX_STAGE_COUNT; i++)
+        {
+            var enemyDataList = GetEnemyDataList(i + 1);
+            tempJson.Add(JsonUtility.ToJson(new Serialization<EnemyData>(enemyDataList)));
+        }
+        var stageDataJson = JsonUtility.ToJson(new Serialization<string>(tempJson), true);
+
+        using (StreamWriter writer = new StreamWriter(path + fileName, false, Encoding.GetEncoding("utf-8")))
+        {
+            writer.WriteLine(stageDataJson);
+        }
+    }
+
+    public static List<List<EnemyData>> GetStageData()
+    {
+        if (File.Exists(path + fileName))
+        {
+            using (StreamReader sr = new StreamReader(path + fileName, Encoding.GetEncoding("utf-8")))
+            {
+                var tempData = JsonUtility.FromJson<Serialization<string>>(sr.ReadToEnd()).ToList();
+                var stageData = tempData.Select(json => JsonUtility.FromJson<Serialization<EnemyData>>(json).ToList()).ToList();
+                return stageData;
+            }
+        }
+        else { return new List<List<EnemyData>>(); };
+    }
+
+    // List<T>
+    [Serializable]
+    public class Serialization<T>
+    {
+        [SerializeField]
+        List<T> target;
+        public List<T> ToList() { return target; }
+
+        public Serialization(List<T> target)
+        {
+            this.target = target;
+        }
+    }
+
     /// <summary>
     /// ランダムでステージを作成
     /// stageId >= 1
     /// </summary>
-    public static List<EnemyData> GetEnemySpawnDataList(int stageId)
+    public static List<EnemyData> GetEnemyDataList(int stageId)
     {
         var intervalAndDifficultyDataList = GetIntervalAndDifficultyDataList(stageId);
         var simpleEnemyDataList = new List<SimpleEnemyData>();

@@ -14,6 +14,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField] private List<GameObject> _enemyPrefabList;
     [SerializeField] private GameObject _spawnCircle;
     [SerializeField] public bool _isTestMode;
+    [SerializeField] public bool _isCreateNewStageData;
 
     [HideInInspector] public float score;
     [HideInInspector] public float stageClearScore;
@@ -30,6 +31,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private void Start()
     {
         ConnectCharaAndJoystick();
+
+        if(_isCreateNewStageData) StageCreator.CreateStage();
     }
 
     private void ConnectCharaAndJoystick()

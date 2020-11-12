@@ -9,7 +9,8 @@ public static class MasterRecords
     public static List<EnemyData> GetEnemySpawnDataList(int stageId) {
         if (stageId > ConstUtil.MAX_STAGE_COUNT || stageId < 0) return new List<EnemyData>();
 
-        return StageCreator.GetEnemySpawnDataList(stageId);
+        var stageData = StageCreator.GetStageData();
+        return stageData[stageId - 1];
     }
 
     // nextLevelレベルにレベルアップするために必要なコイン量を取得

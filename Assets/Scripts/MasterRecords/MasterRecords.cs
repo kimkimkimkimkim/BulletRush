@@ -16,13 +16,13 @@ public static class MasterRecords
     // nextLevelレベルにレベルアップするために必要なコイン量を取得
     public static int GetLevelUpCoin(int nextLevel)
     {
-        return (int)Math.Pow(nextLevel - 1,2);
+        return (int)Math.Pow(nextLevel - 1,2) * 10;
     }
 
     // stageIdステージをクリアした際に取得するコイン量を取得
     public static int GetStageClearRewardCoin(int stageId)
     {
-        return (int)(2 * Math.Log10(GetLevelUpCoin(stageId + 1)));
+        return (int)(GetLevelUpCoin(stageId + 1));
     }
 
     // コイン倍率ステータスを取得

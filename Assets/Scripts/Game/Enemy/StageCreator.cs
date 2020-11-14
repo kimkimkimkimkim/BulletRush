@@ -68,7 +68,7 @@ public static class StageCreator
         for(var i = 0; i< intervalAndDifficultyDataList.Count; i++)
         {
             var intervalAndDifficultyData = intervalAndDifficultyDataList[i];
-            simpleEnemyDataList = simpleEnemyDataList.Concat(GetSimpleEnemyDataList(intervalAndDifficultyData,time)).ToList();
+            simpleEnemyDataList = simpleEnemyDataList.Concat(GetSimpleEnemyDataList(stageId, intervalAndDifficultyData,time)).ToList();
             time += intervalAndDifficultyData.interval;
         }
 
@@ -104,10 +104,10 @@ public static class StageCreator
         return enemyDataList;
     }
 
-    private static List<SimpleEnemyData> GetSimpleEnemyDataList(IntervalAndDifficultyData data,float time)
+    private static List<SimpleEnemyData> GetSimpleEnemyDataList(int stageId,IntervalAndDifficultyData data,float time)
     {
         var random = UnityEngine.Random.Range(1, 101);
-
+        var assumptionDps = MasterRecords.GetAssumptionDPS(stageId);
         var health = 0;
         var size = EnemySize.None;
         var num = 0;
@@ -116,25 +116,25 @@ public static class StageCreator
             case Difficulty.Easy:
                 if(random <= 50)
                 {
-                    health = (int)Math.Ceiling(data.interval);
+                    health = (int)Math.Ceiling(data.interval * assumptionDps);
                     size = EnemySize.Small;
                     num = 1;
                 }
                 else if(random <= 70)
                 {
-                    health = (int)Math.Ceiling(data.interval/2);
+                    health = (int)Math.Ceiling(data.interval * assumptionDps / 2);
                     size = EnemySize.Small;
                     num = 2;
                 }
                 else if(random <= 90)
                 {
-                    health = (int)Math.Ceiling(data.interval / 2);
+                    health = (int)Math.Ceiling(data.interval * assumptionDps / 2);
                     size = EnemySize.Medium;
                     num = 1;
                 }
                 else
                 {
-                    health = (int)Math.Ceiling(data.interval / 4);
+                    health = (int)Math.Ceiling(data.interval * assumptionDps / 4);
                     size = EnemySize.Small;
                     num = 1;
                 }
@@ -143,37 +143,37 @@ public static class StageCreator
             case Difficulty.Medium:
                 if (random <= 15)
                 {
-                    health = (int)Math.Ceiling(data.interval);
+                    health = (int)Math.Ceiling(data.interval * assumptionDps);
                     size = EnemySize.Small;
                     num = 1;
                 }
                 else if (random <= 25)
                 {
-                    health = (int)Math.Ceiling(data.interval / 2);
+                    health = (int)Math.Ceiling(data.interval * assumptionDps / 2);
                     size = EnemySize.Small;
                     num = 2;
                 }
                 else if (random <= 85)
                 {
-                    health = (int)Math.Floor(data.interval / 2);
+                    health = (int)Math.Ceiling(data.interval * assumptionDps / 2);
                     size = EnemySize.Medium;
                     num = 1;
                 }
                 else if (random <= 90)
                 {
-                    health = (int)Math.Ceiling(data.interval / 4);
+                    health = (int)Math.Ceiling(data.interval * assumptionDps / 4);
                     size = EnemySize.Medium;
                     num = 2;
                 }
                 else if (random <= 95)
                 {
-                    health = (int)Math.Ceiling(data.interval / 4);
+                    health = (int)Math.Ceiling(data.interval * assumptionDps / 4);
                     size = EnemySize.Large;
                     num = 1;
                 }
                 else
                 {
-                    health = (int)Math.Ceiling(data.interval / 8);
+                    health = (int)Math.Ceiling(data.interval * assumptionDps / 8);
                     size = EnemySize.Large;
                     num = 2;
                 }
@@ -181,49 +181,49 @@ public static class StageCreator
             case Difficulty.Difficult:
                 if (random <= 5)
                 {
-                    health = (int)Math.Ceiling(data.interval / 2);
+                    health = (int)Math.Ceiling(data.interval * assumptionDps / 2);
                     size = EnemySize.Small;
                     num = 2;
                 }
                 else if (random <= 25)
                 {
-                    health = (int)Math.Ceiling(data.interval / 4);
+                    health = (int)Math.Ceiling(data.interval * assumptionDps / 4);
                     size = EnemySize.Small;
                     num = 4;
                 }
                 else if (random <= 45)
                 {
-                    health = (int)Math.Ceiling(data.interval / 2);
+                    health = (int)Math.Ceiling(data.interval * assumptionDps / 2);
                     size = EnemySize.Medium;
                     num = 1;
                 }
                 else if (random <= 60)
                 {
-                    health = (int)Math.Ceiling(data.interval / 4);
+                    health = (int)Math.Ceiling(data.interval * assumptionDps / 4);
                     size = EnemySize.Medium;
                     num = 2;
                 }
                 else if (random <= 65)
                 {
-                    health = (int)Math.Ceiling(data.interval / 8);
+                    health = (int)Math.Ceiling(data.interval * assumptionDps / 8);
                     size = EnemySize.Medium;
                     num = 4;
                 }
                 else if (random <= 85)
                 {
-                    health = (int)Math.Ceiling(data.interval / 4);
+                    health = (int)Math.Ceiling(data.interval * assumptionDps / 4);
                     size = EnemySize.Large;
                     num = 1;
                 }
                 else if (random <= 95)
                 {
-                    health = (int)Math.Ceiling(data.interval / 8);
+                    health = (int)Math.Ceiling(data.interval * assumptionDps / 8);
                     size = EnemySize.Large;
                     num = 2;
                 }
                 else
                 {
-                    health = (int)Math.Ceiling(data.interval / 16);
+                    health = (int)Math.Ceiling(data.interval * assumptionDps / 16);
                     size = EnemySize.Large;
                     num = 4;
                 }

@@ -48,15 +48,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
         _characterManager.SetStatus();
         score = 0;
-        stageClearScore = GetStageClearScore(enemySpawnDataList);
         killNum = 0;
         stageClearKillNum = GetStageClearKillNum(enemySpawnDataList);
         InitializePhase();
         enemyManagerList.Clear();
         CreateEnemy(enemySpawnDataList);
 
-        var simulationResultText = Simulation.GetSimulationResult(enemySpawnDataList);
-        GameWindowFactory.Create(new GameWindowRequest() { simulationResultText = simulationResultText })
+        GameWindowFactory.Create(new GameWindowRequest() { simulationResultText = "" })
             .Subscribe();
     }
 
@@ -148,7 +146,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         spawnCircle.transform.position = new Vector3(position.x, y, position.z);
         spawnCircle.GetComponent<SpawnCircleManager>().SetAlpha(0);
 
-        return spawnCircle.GetComponent<SpawnCircleManager>().PlayAnimationObservable();
+        return spawnCircle.GetComponent<SpawnCircleManager>().PlayAnimationObservable().DoOnCompleted(() => Destroy(spawnCircle));
     }
 
     private void CreateEnemy(EnemyData enemyData)
@@ -188,7 +186,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                         Time.timeScale = 1;
                         UIManager.Instance.SetUI(UIMode.Playing);
                     });
-
                 }
                 else
                 {
@@ -275,7 +272,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         var rewardCoinStatus = MasterRecords.GetCoinBonusStatus(rewardCoinStatusLevel);
         var rewardCoin = MasterRecords.GetStageClearRewardCoin(stageId);
         SaveDataUtil.Status.SetClearedStageId(stageId);
-
         Observable.ReturnUnit()
             .Delay(TimeSpan.FromSeconds(0.05f), Scheduler.MainThreadIgnoreTimeScale)
             .SelectMany(_ => ClearWindowFactory.Create(new ClearWindowRequest()
@@ -285,8 +281,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                     rewardGem = 1
                 },
             }))
-            .Do(_ => Time.timeScale = 1)
-            .Do(_ => SceneManager.LoadScene(SceneManager.GetActiveScene().name))
+            .Do(_ =>
+            {
+                Time.timeScale = 1;
+                MobileAdsManager.Instance.DestroyBanner();
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            })
             .Subscribe();
     }
 

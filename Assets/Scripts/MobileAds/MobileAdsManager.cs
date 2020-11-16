@@ -174,6 +174,11 @@ public class MobileAdsManager : SingletonMonoBehaviour<MobileAdsManager>
     #endregion
 
     #region Rewarded
+    public bool IsRewardAdLoaded()
+    {
+        return this.rewardedAd.IsLoaded();
+    }
+
     public bool TryShowRewarded(Action action)
     {
         if (this.rewardedAd.IsLoaded())

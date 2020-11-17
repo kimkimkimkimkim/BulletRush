@@ -1,4 +1,6 @@
-﻿public class SaveDataUtil
+﻿using System;
+
+public class SaveDataUtil
 {
     public static class Status
     {
@@ -8,6 +10,7 @@
         private const string DAMAGE_LEVEL = "damage_level";
         private const string COIN_LEVEL = "coin_level";
         private const string OFFLINE_REWARD_LEVEL = "offline_reward_level";
+        private const string LAST_QUIT_TIME = "last_quit_time";
         #endregion
 
         #region GET
@@ -49,6 +52,12 @@
         {
             return SaveData.GetInt(OFFLINE_REWARD_LEVEL, 1);
         }
+
+        public static DateTime GetLastQuitTime()
+        {
+            var lastQuitTimeString = SaveData.GetString(LAST_QUIT_TIME,DateTimeUtil.EPOCH.ToBinary().ToString());
+            return DateTime.FromBinary(System.Convert.ToInt64(lastQuitTimeString));
+        }
         #endregion
 
         #region SET
@@ -81,6 +90,12 @@
             SaveData.SetInt(OFFLINE_REWARD_LEVEL, offlineRewardLevel);
             SaveData.Save();
         }
+
+        public static void SetLastQuitTime()
+        {
+            SaveData.SetString(LAST_QUIT_TIME, DateTime.Now.ToBinary().ToString());
+            SaveData.Save();
+        }
         #endregion
     }
 
@@ -107,6 +122,12 @@
         public static void SetCoin(int coin)
         {
             SaveData.SetInt(COIN, coin);
+            SaveData.Save();
+        }
+
+        public static void AddCoin(int coin) {
+            var currentCoin = GetCoin();
+            SaveData.SetInt(COIN, currentCoin + coin);
             SaveData.Save();
         }
 

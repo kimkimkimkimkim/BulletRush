@@ -135,7 +135,7 @@ public class HomeWindowUIScript : WindowBase
         _stageText.text = "STAGE " + nextStageId;
     }
 
-    private void SetPropertyInfo()
+    public void SetPropertyInfo()
     {
         if (coinTextObservable != null) coinTextObservable.Dispose();
         if (gemTextObservable != null) gemTextObservable.Dispose();

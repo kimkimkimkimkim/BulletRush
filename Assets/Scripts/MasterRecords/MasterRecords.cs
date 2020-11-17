@@ -52,4 +52,14 @@ public static class MasterRecords
     {
         return GetDamageStatus(stageId) / GetRateStatus(stageId);
     }
+
+    // 経過時間からオフライン報酬を計算しその値を返す
+    public static int GetOfflineReward(double elapsedTimeSeconds) {
+        if (elapsedTimeSeconds < ConstUtil.MIN_ELAPSED_TIME) return 0;
+
+        if (elapsedTimeSeconds > ConstUtil.MAX_ELAPSED_TIME) elapsedTimeSeconds = ConstUtil.MAX_ELAPSED_TIME;
+        var nextStageId = SaveDataUtil.Status.GetNextStageId();
+        var maxReward = GetLevelUpCoin(nextStageId) * 2;
+        return (int)Math.Ceiling(maxReward * (elapsedTimeSeconds / ConstUtil.MAX_ELAPSED_TIME));
+    }
 }

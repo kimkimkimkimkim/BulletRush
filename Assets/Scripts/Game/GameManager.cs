@@ -31,7 +31,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private void Start()
     {
         ConnectCharaAndJoystick();
-        OfflineRewardReceiveDialogFactory.Create(new OfflineRewardReceiveDialogRequest() { content = "22" }).Subscribe();
 
         if(_isCreateNewStageData) StageCreator.CreateStage();
     }

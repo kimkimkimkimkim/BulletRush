@@ -19,14 +19,13 @@ public class OfflineRewardManager : SingletonMonoBehaviour<OfflineRewardManager>
         TimeSpan timeSpan = now - lastQuitTime;
         double elapsedTimeSeconds = timeSpan.TotalSeconds;
 
-        Debug.Log("last : " + lastQuitTime + " now : " + now + " 経過時間(秒) : " + elapsedTimeSeconds);
         if(lastQuitTime != DateTimeUtil.EPOCH && elapsedTimeSeconds >= 60)
         {
             var offlineRewardStatusLevel = SaveDataUtil.Status.GetOfflineRewardLevel();
             var offlineRewardStatus = MasterRecords.GetOfflineBonusStatus(offlineRewardStatusLevel);
             var reward = (int)(MasterRecords.GetOfflineReward(elapsedTimeSeconds) * offlineRewardStatus);
 
-            OfflineRewardReceiveDialogFactory.Create(new OfflineRewardReceiveDialogRequest() { content = reward.ToString() })
+            OfflineRewardReceiveDialogFactory.Create(new OfflineRewardReceiveDialogRequest() { content = TextUtil.GetFormattedValue(reward) })
                 .Do(res =>
                 {
                     if (res.isBonus) reward *= 2;

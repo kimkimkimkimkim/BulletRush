@@ -164,25 +164,26 @@ public class HomeWindowUIScript : WindowBase
                 level = SaveDataUtil.Status.GetRateLevel();
                 var rate = MasterRecords.GetRateStatus(level);
                 titleText = "RATE";
-                valueText = rate + "/s";
+                valueText = TextUtil.GetFormattedValue(rate) + "/s";
                 break;
             case TabType.Damage:
                 level = SaveDataUtil.Status.GetDamageLevel();
                 var damage = MasterRecords.GetDamageStatus(level);
                 titleText = "DAMAGE";
-                valueText = damage.ToString();
+                valueText = TextUtil.GetFormattedValue(damage);
                 break;
             case TabType.Coin:
                 level = SaveDataUtil.Status.GetCoinLevel();
                 var coin = MasterRecords.GetCoinBonusStatus(level) * 100;
+                Debug.Log("coin:" + coin);
                 titleText = "COIN";
-                valueText = coin + "%";
+                valueText = TextUtil.GetFormattedValue(coin)+ "%";
                 break;
             case TabType.OfflineReward:
                 level = SaveDataUtil.Status.GetOfflineRewardLevel();
                 var offlineReward = MasterRecords.GetOfflineBonusStatus(level) * 100;
                 titleText = "OFFLINE";
-                valueText = offlineReward + "%";
+                valueText = TextUtil.GetFormattedValue(offlineReward) + "%";
                 break;
             default:
                 titleText = "";

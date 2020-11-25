@@ -11,11 +11,11 @@ public class ClearWindowFactory : MonoBehaviour
         return Observable.Create<ClearWindowResponse>(observer => {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("onClickBonus", new Action(() => {
-                observer.OnNext(new ClearWindowResponse());
+                observer.OnNext(new ClearWindowResponse() { isBonus = true});
                 observer.OnCompleted();
             }));
             param.Add("onClickNext", new Action(() => {
-                observer.OnNext(new ClearWindowResponse());
+                observer.OnNext(new ClearWindowResponse() { isBonus = false});
                 observer.OnCompleted();
             }));
             param.Add("clearResultData", request.clearResultData);

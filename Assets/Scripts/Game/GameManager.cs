@@ -284,11 +284,22 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                     rewardGem = 1
                 },
             }))
-            .Do(_ =>
+            .Do(res =>
             {
-                Time.timeScale = 1;
-                MobileAdsManager.Instance.DestroyBanner();
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                if (res.isBonus) {
+                    MobileAdsManager.Instance.TryShowRewarded(() =>
+                    {
+                        Time.timeScale = 1;
+                        MobileAdsManager.Instance.DestroyBanner();
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    });
+                }
+                else
+                {
+                    Time.timeScale = 1;
+                    MobileAdsManager.Instance.DestroyBanner();
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                }
             })
             .Subscribe().AddTo(this);
     }

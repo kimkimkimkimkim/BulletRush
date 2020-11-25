@@ -2,12 +2,18 @@
 
 public class ClearWindowRequest
 {
+    /// <summary>
+    /// リザルトデータ
+    /// </summary>
     public ClearResultData clearResultData;
 }
 
 public class ClearWindowResponse
 {
-
+    /// <summary>
+    /// ボーナスかどうか
+    /// </summary>
+    public bool isBonus;
 }
 
 public class ClearResultData

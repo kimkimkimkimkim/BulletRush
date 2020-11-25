@@ -11,28 +11,37 @@ public class GameWindowUIScript : WindowBase
 {
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private Slider _scoreSlider;
+    [SerializeField] private Text _currentStageIdText;
+    [SerializeField] private Text _nextStageIdText;
     [SerializeField] private Text _simulationResultText;
     [SerializeField] private Text _speedUpText;
+
+    private double stageClearScore;
 
     public override void Init(Dictionary<string, object> param)
     {
         var simulationResultText = (string)param["simulationResultText"];
+        var stageId = (int)param["stageId"];
+
         _simulationResultText.text = simulationResultText;
+        _currentStageIdText.text = stageId.ToString();
+        _nextStageIdText.text = (stageId + 1).ToString();
 
         SetInitialScore();
     }
 
     private void SetInitialScore()
     {
+        stageClearScore = GameManager.Instance.stageClearScore;
         _scoreText.text = "0";
-        _scoreSlider.maxValue = GameManager.Instance.stageClearScore;
+        _scoreSlider.maxValue = 1;
         _scoreSlider.value = 0;
     }
 
-    public void SetScore(float score)
+    public void SetScore(double score)
     {
         _scoreText.text = Math.Floor(score).ToString();
-        _scoreSlider.value = score;
+        _scoreSlider.value = (float)(score/stageClearScore);
     }
 
     public void PlaySpeedUpAnimationObservable()

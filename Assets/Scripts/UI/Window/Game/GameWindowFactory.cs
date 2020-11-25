@@ -11,6 +11,7 @@ public class GameWindowFactory
         return Observable.Create<GameWindowResponse>(observer => {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("simulationResultText", request.simulationResultText);
+            param.Add("stageId", request.stageId);
             var window = (GameObject)Resources.Load("UI/Window/GameWindow");
             UIManager.Instance.OpenWindow<GameWindowUIScript>(window, param);
             return Disposable.Empty;

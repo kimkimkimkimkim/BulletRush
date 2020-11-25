@@ -20,6 +20,7 @@ public class CharacterManager : MonoBehaviour
     private const float BULLET_SPEED = 30f;
     private const float MAX_FIRE_INTERVAL = 0.1f;
 
+    private bool isInvincible = false;
     private bool canFire = true;
     private bool isMove = false;
     private List<Collider> rangeColliderList = new List<Collider>();
@@ -35,7 +36,7 @@ public class CharacterManager : MonoBehaviour
         _body.OnTriggerEnterAsObservable()
             .Do(collider =>
             {
-                if(collider.gameObject.tag == "Enemy") {
+                if(collider.gameObject.tag == "Enemy" && !isInvincible) {
                     gameManager.Defeat();
                 }
             })
@@ -225,6 +226,12 @@ public class CharacterManager : MonoBehaviour
             }
         };
         return closestCollider;
+    }
+
+    public void SetInvincible(bool isInvincible)
+    {
+        this.isInvincible = isInvincible;
+
     }
 
     private enum Condition { 

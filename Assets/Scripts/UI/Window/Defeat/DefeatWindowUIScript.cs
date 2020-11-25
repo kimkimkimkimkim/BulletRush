@@ -74,7 +74,8 @@ public class DefeatWindowUIScript : WindowBase
                 _continueButton.gameObject.SetActive(false);
                 _noThanksButton.gameObject.SetActive(true);
             })
-            .Subscribe();
+            .Subscribe()
+            .AddTo(this);
     }
 
     private IObservable<Unit> PlayCountdownAnimation(int num) {

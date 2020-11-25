@@ -6,6 +6,8 @@ using System;
 
 public class MobileAdsManager : SingletonMonoBehaviour<MobileAdsManager>
 {
+    [SerializeField] protected bool _isTestAdUnitId = true;
+
     private BannerView bannerView;
     private InterstitialAd interstitial;
     private RewardedAd rewardedAd;
@@ -35,9 +37,9 @@ public class MobileAdsManager : SingletonMonoBehaviour<MobileAdsManager>
     public void RequestBanner()
     {
         #if UNITY_ANDROID
-            string adUnitId = "ca-app-pub-3940256099942544/6300978111";
+            string adUnitId = _isTestAdUnitId ? "ca-app-pub-3940256099942544/6300978111" : "ca-app-pub-1070619740695797/2801520058";
         #elif UNITY_IPHONE
-            string adUnitId = "ca-app-pub-3940256099942544/2934735716";
+            string adUnitId = _isTestAdUnitId ? "ca-app-pub-3940256099942544/2934735716" : "ca-app-pub-1070619740695797/9941643473";
         #else
             string adUnitId = "unexpected_platform";
         #endif
@@ -112,9 +114,9 @@ public class MobileAdsManager : SingletonMonoBehaviour<MobileAdsManager>
     private void RequestInterstitial()
     {
         #if UNITY_ANDROID
-            string adUnitId = "ca-app-pub-3940256099942544/1033173712";
+            string adUnitId = _isTestAdUnitId ? "ca-app-pub-3940256099942544/1033173712" : "ca-app-pub-1070619740695797/1296866698";
         #elif UNITY_IPHONE
-            string adUnitId = "ca-app-pub-3940256099942544/4411468910";
+            string adUnitId = _isTestAdUnitId ? "ca-app-pub-3940256099942544/4411468910" : "ca-app-pub-1070619740695797/4745157117";
         #else
             string adUnitId = "unexpected_platform";
         #endif
@@ -196,9 +198,9 @@ public class MobileAdsManager : SingletonMonoBehaviour<MobileAdsManager>
     private void RequestRewarded()
     {
         #if UNITY_ANDROID
-            string adUnitId = "ca-app-pub-3940256099942544/5224354917";
+            string adUnitId = _isTestAdUnitId ? "ca-app-pub-3940256099942544/5224354917" : "ca-app-pub-1070619740695797/7891222877";
         #elif UNITY_IPHONE
-            string adUnitId = "ca-app-pub-3940256099942544/1712485313";
+            string adUnitId = _isTestAdUnitId ? "ca-app-pub-3940256099942544/1712485313" : "ca-app-pub-1070619740695797/4949187151";
         #else
             string adUnitId = "unexpected_platform";
         #endif

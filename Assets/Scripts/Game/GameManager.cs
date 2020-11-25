@@ -16,8 +16,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField] public bool _isTestMode;
     [SerializeField] public bool _isCreateNewStageData;
 
-    [HideInInspector] public float score;
-    [HideInInspector] public float stageClearScore;
+    [HideInInspector] public double score;
+    [HideInInspector] public double stageClearScore;
     [HideInInspector] public Phase phase;
 
     private GameWindowUIScript gameWindowUIScript;
@@ -49,6 +49,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         _characterManager.SetStatus();
         score = 0;
         killNum = 0;
+        stageClearScore = GetStageClearScore(enemySpawnDataList);
         stageClearKillNum = GetStageClearKillNum(enemySpawnDataList);
         InitializePhase();
         enemyManagerList.Clear();
@@ -84,9 +85,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         enemyManager.Move(rigidbody.velocity);
     }
 
-    private int GetStageClearScore(List<EnemyData> enemyDataList)
+    private double GetStageClearScore(List<EnemyData> enemyDataList)
     {
-        var score = 0;
+        var score = 0d;
         enemyDataList.ForEach(enemyData =>
         {
             score +=  GetTotalNum((int)enemyData.health,enemyData.enemySize);
@@ -185,6 +186,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                     {
                         Time.timeScale = 1;
                         UIManager.Instance.SetUI(UIMode.Playing);
+                        _characterManager.SetInvincible(true);
+                        Observable.Timer(TimeSpan.FromSeconds(2)).Do(_ => _characterManager.SetInvincible(false)).Subscribe().AddTo(this);
                     });
                 }
                 else
@@ -196,7 +199,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
             })
-            .Subscribe();
+            .Subscribe().AddTo(this);
     }
 
     public void AddScore(float damage)
@@ -287,7 +290,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 MobileAdsManager.Instance.DestroyBanner();
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             })
-            .Subscribe();
+            .Subscribe().AddTo(this);
     }
 
     public enum Phase

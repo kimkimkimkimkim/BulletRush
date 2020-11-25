@@ -93,13 +93,8 @@ public class ClearWindowUIScript : WindowBase
                 return DOTween.Sequence()
                     .SetUpdate(true)
                     .Append(DOTween.To(() => coin, (x) => coin = x, clearResultData.rewardCoin, 1).OnUpdate(() => {
-                        _rewardCoinText.text = "+ " + coin.ToString();
-                        _possessionCoinText.text = (possessionCoin + coin).ToString();
-                    }))
-                    .Append(DOTween.To(() => gem, (x) => gem = x, clearResultData.rewardGem, 1).OnUpdate(() =>
-                    {
-                        _rewardGemText.text = "+ " + gem.ToString();
-                        _possessionGemText.text = (possessionGem + gem).ToString();
+                        _rewardCoinText.text = "+ " + TextUtil.GetFormattedValue(coin);
+                        _possessionCoinText.text = TextUtil.GetFormattedValue(possessionCoin + coin);
                     }))
                     .PlayAsObservable();
             })

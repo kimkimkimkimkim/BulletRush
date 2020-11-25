@@ -144,7 +144,7 @@ public class HomeWindowUIScript : WindowBase
 
         var coin = int.Parse(_coinText.text);
         var gem = int.Parse(_gemText.text);
-        coinTextObservable = DOTween.To(() => coin, x => _coinText.text = x.ToString(), SaveDataUtil.Property.GetCoin(), ANIMATION_TIME)
+        coinTextObservable = DOTween.To(() => coin, x => _coinText.text = TextUtil.GetFormattedValue(x), SaveDataUtil.Property.GetCoin(), ANIMATION_TIME)
             .OnCompleteAsObservable()
             .Subscribe();
         gemTextObservable = DOTween.To(() => gem,x => _gemText.text = x.ToString(),SaveDataUtil.Property.GetGem(),ANIMATION_TIME)

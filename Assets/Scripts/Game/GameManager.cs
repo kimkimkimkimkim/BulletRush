@@ -62,14 +62,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private void InitializePhase()
     {
         phase = Phase.Phase1;
-        phase2Observable = Observable.Timer(TimeSpan.FromSeconds(15))
+        phase2Observable = Observable.Timer(TimeSpan.FromSeconds(30))
             .Do(_ => {
                 phase = Phase.Phase2;
                 enemyManagerList.ForEach(e => SetSpeedAndMove(e));
                 UIManager.Instance.PlaySpeedUpAnimationObservable();
             })
             .Subscribe();
-        phase3Observable = Observable.Timer(TimeSpan.FromSeconds(45))
+        phase3Observable = Observable.Timer(TimeSpan.FromSeconds(60))
             .Do(_ => {
                 phase = Phase.Phase3;
                 enemyManagerList.ForEach(e => SetSpeedAndMove(e));

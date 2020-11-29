@@ -55,7 +55,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         enemyManagerList.Clear();
         CreateEnemy(enemySpawnDataList);
 
-        GameWindowFactory.Create(new GameWindowRequest() { simulationResultText = "" })
+        GameWindowFactory.Create(new GameWindowRequest() { simulationResultText = "" ,stageId = stageId})
             .Subscribe();
     }
 

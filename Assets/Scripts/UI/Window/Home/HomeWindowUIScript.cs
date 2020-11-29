@@ -142,8 +142,8 @@ public class HomeWindowUIScript : WindowBase
 
         const float ANIMATION_TIME = 0.5f;
 
-        var coin = int.Parse(_coinText.text);
-        var gem = int.Parse(_gemText.text);
+        var coin = TextUtil.GetDeserializedValue(_coinText.text);
+        var gem = TextUtil.GetDeserializedValue(_gemText.text);
         coinTextObservable = DOTween.To(() => coin, x => _coinText.text = TextUtil.GetFormattedValue(x), SaveDataUtil.Property.GetCoin(), ANIMATION_TIME)
             .OnCompleteAsObservable()
             .Subscribe();
@@ -175,7 +175,6 @@ public class HomeWindowUIScript : WindowBase
             case TabType.Coin:
                 level = SaveDataUtil.Status.GetCoinLevel();
                 var coin = MasterRecords.GetCoinBonusStatus(level) * 100;
-                Debug.Log("coin:" + coin);
                 titleText = "COIN";
                 valueText = TextUtil.GetFormattedValue(coin)+ "%";
                 break;

@@ -4,7 +4,35 @@ using System.Linq;
 public static class TextUtil { 
 
     /// <summary>
-    /// 与えられたfloat値をフォーマット化し文字列として返す
+    /// フォーマット化した文字列をdouble値に戻して返す
+    /// </summary>
+    public static double GetDeserializedValue(string value) {
+        var lastChar = value.Substring(value.Length - 1);
+        var unit = "";
+        var unitType = default(UnitType);
+        foreach(UnitType u in Enum.GetValues(typeof(UnitType)))
+        {
+            if (lastChar == u.GetName())
+            {
+                unit = u.GetName();
+                unitType = u;
+            }
+        }
+
+        var numStr = unit == "" ? value : value.Substring(0, value.Length - 1);
+        var num = 0d;
+        if (double.TryParse(numStr, out num))
+        {
+            return num * (Math.Pow(1000,(int)unitType));
+        }
+        else
+        {
+            return 0d;
+        }
+    }
+
+    /// <summary>
+    /// 与えられたdouble値をフォーマット化し文字列として返す
     /// </summary>
     public static string GetFormattedValue(double value)
     {

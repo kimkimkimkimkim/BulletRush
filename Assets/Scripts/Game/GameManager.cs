@@ -285,9 +285,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             }))
             .Do(res =>
             {
+                var coin = SaveDataUtil.Property.GetCoin();
                 if (res.isBonus) {
                     MobileAdsManager.Instance.TryShowRewarded(() =>
                     {
+                        SaveDataUtil.Property.SetCoin(coin + (rewardCoin * 3));
                         Time.timeScale = 1;
                         MobileAdsManager.Instance.DestroyBanner();
                         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -295,6 +297,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 }
                 else
                 {
+                    SaveDataUtil.Property.SetCoin(coin);
                     Time.timeScale = 1;
                     MobileAdsManager.Instance.DestroyBanner();
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);

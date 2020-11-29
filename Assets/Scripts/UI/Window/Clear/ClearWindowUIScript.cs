@@ -64,17 +64,7 @@ public class ClearWindowUIScript : WindowBase
             })
             .Subscribe();
 
-        SaveData();
         PlayAnimation();
-    }
-
-    private void SaveData()
-    {
-        var coin = SaveDataUtil.Property.GetCoin();
-        var gem = SaveDataUtil.Property.GetGem();
-
-        SaveDataUtil.Property.SetCoin(coin + clearResultData.rewardCoin);
-        SaveDataUtil.Property.SetGem(gem + clearResultData.rewardGem);
     }
 
     private void PlayAnimation() {
@@ -94,7 +84,6 @@ public class ClearWindowUIScript : WindowBase
                     .SetUpdate(true)
                     .Append(DOTween.To(() => coin, (x) => coin = x, clearResultData.rewardCoin, 1).OnUpdate(() => {
                         _rewardCoinText.text = "+ " + TextUtil.GetFormattedValue(coin);
-                        _possessionCoinText.text = TextUtil.GetFormattedValue(possessionCoin + coin);
                     }))
                     .PlayAsObservable();
             })

@@ -193,7 +193,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 else
                 {
                     Time.timeScale = 1;
-                    MobileAdsManager.Instance.TryShowInterstitial();
                     MobileAdsManager.Instance.DestroyBanner();
                     Dispose();
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);

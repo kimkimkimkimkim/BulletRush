@@ -13,6 +13,7 @@ public class DefeatWindowUIScript : WindowBase
     [SerializeField] private List<Sprite> _countdownSpriteList;
     [SerializeField] private Button _continueButton;
     [SerializeField] private Button _noThanksButton;
+    [SerializeField] private Button _backButton;
 
     private const float COUNTDOWN_TIME = 5f; // カウントダウン時間
     private const int MAX_COUNTDOWN_NUM = 3; // カウントダウンの最大値(3->2->1)
@@ -53,7 +54,25 @@ public class DefeatWindowUIScript : WindowBase
             })
             .Subscribe();
 
-        PlayAnimation();
+        _backButton.OnClickAsObservable()
+            .Do(_ =>
+            {
+                if (onClickNoThanks != null)
+                {
+                    onClickNoThanks();
+                    onClickNoThanks = null;
+                }
+            })
+            .Subscribe();
+
+        // 確率でコンティニュー出来るかどうかが決まる
+        if (UnityEngine.Random.Range(0,3) == 0)
+        {
+            _backButton.gameObject.SetActive(true);
+        }
+        else {
+            PlayAnimation();
+        }
     }
 
     private void PlayAnimation()

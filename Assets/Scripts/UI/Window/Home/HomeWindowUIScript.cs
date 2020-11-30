@@ -11,21 +11,21 @@ using DG.Tweening;
 
 public class HomeWindowUIScript : WindowBase
 {
-    [SerializeField] private TextMeshProUGUI _stageText;
-    [SerializeField] private TextMeshProUGUI _coinText;
-    [SerializeField] private TextMeshProUGUI _gemText;
+    [SerializeField] private Text _stageText;
+    [SerializeField] private Text _coinText;
+    [SerializeField] private Text _gemText;
     [SerializeField] private GameObject _dragIcon;
     [SerializeField] private Button _debugButton;
     [SerializeField] private Button _rateButton;
     [SerializeField] private Button _damageButton;
     [SerializeField] private Button _coinButton;
     [SerializeField] private Button _offlineRewardButton;
-    [SerializeField] private TextMeshProUGUI _titleText;
+    [SerializeField] private Text _titleText;
     [SerializeField] private Text _valueText;
     [SerializeField] private GameObject _valueTextEffectArea;
     [SerializeField] private Button _upgradeButton;
     [SerializeField] private List<Sprite> _buttonSpriteList;
-    [SerializeField] private TextMeshProUGUI _upgradeCostText;
+    [SerializeField] private Text _upgradeCostText;
     [SerializeField] private GameObject _upgradeButtonGrayOutPanel;
 
     private TabType currentTabType = TabType.Rate;

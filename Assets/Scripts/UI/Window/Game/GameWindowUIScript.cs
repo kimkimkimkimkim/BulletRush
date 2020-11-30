@@ -9,7 +9,7 @@ using DG.Tweening;
 
 public class GameWindowUIScript : WindowBase
 {
-    [SerializeField] private TextMeshProUGUI _scoreText;
+    [SerializeField] private Text _scoreText;
     [SerializeField] private Slider _scoreSlider;
     [SerializeField] private Text _currentStageIdText;
     [SerializeField] private Text _nextStageIdText;

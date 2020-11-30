@@ -9,13 +9,13 @@ using TMPro;
 
 public class ClearWindowUIScript : WindowBase
 {
-    [SerializeField] private TextMeshProUGUI _possessionCoinText;
-    [SerializeField] private TextMeshProUGUI _possessionGemText;
+    [SerializeField] private Text _possessionCoinText;
+    [SerializeField] private Text _possessionGemText;
     [SerializeField] private GameObject _possessionCoinPanel;
     [SerializeField] private GameObject _possessionGemPanel;
     [SerializeField] private Image _titleImage;
-    [SerializeField] private TextMeshProUGUI _rewardCoinText;
-    [SerializeField] private TextMeshProUGUI _rewardGemText;
+    [SerializeField] private Text _rewardCoinText;
+    [SerializeField] private Text _rewardGemText;
     [SerializeField] private GameObject _rewardCoinPanel;
     [SerializeField] private GameObject _rewardGemPanel;
     [SerializeField] private Image _chestImage;

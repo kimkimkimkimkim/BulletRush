@@ -9,7 +9,7 @@ using UnityEngine;
 
 public static class StageCreator
 {
-    private static readonly string path = Application.dataPath + "/Data/";
+    private static readonly string path = Application.dataPath + "/Resources/MasterRecords/";
     private static readonly string fileName = "StageData.json";
 
     public static void CreateStage()
@@ -30,16 +30,10 @@ public static class StageCreator
 
     public static List<List<EnemyData>> GetStageData()
     {
-        if (File.Exists(path + fileName))
-        {
-            using (StreamReader sr = new StreamReader(path + fileName, Encoding.GetEncoding("utf-8")))
-            {
-                var tempData = JsonUtility.FromJson<Serialization<string>>(sr.ReadToEnd()).ToList();
-                var stageData = tempData.Select(json => JsonUtility.FromJson<Serialization<EnemyData>>(json).ToList()).ToList();
-                return stageData;
-            }
-        }
-        else { return new List<List<EnemyData>>(); };
+        var jsonStr = Resources.Load<TextAsset>("MasterRecords/StageData").ToString();
+        var tempData = JsonUtility.FromJson<Serialization<string>>(jsonStr).ToList();
+        var stageData = tempData.Select(json => JsonUtility.FromJson<Serialization<EnemyData>>(json).ToList()).ToList();
+        return stageData;
     }
 
     // List<T>

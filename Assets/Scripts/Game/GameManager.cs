@@ -62,6 +62,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private void InitializePhase()
     {
         phase = Phase.Phase1;
+        /*
         phase2Observable = Observable.Timer(TimeSpan.FromSeconds(30))
             .Do(_ => {
                 phase = Phase.Phase2;
@@ -76,6 +77,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 UIManager.Instance.PlaySpeedUpAnimationObservable();
             })
             .Subscribe();
+            */           
     }
 
     private void SetSpeedAndMove(EnemyManager enemyManager)
@@ -297,7 +299,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 }
                 else
                 {
-                    SaveDataUtil.Property.SetCoin(coin);
+                    SaveDataUtil.Property.SetCoin(coin + rewardCoin);
                     Time.timeScale = 1;
                     MobileAdsManager.Instance.DestroyBanner();
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
